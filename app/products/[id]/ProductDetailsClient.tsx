@@ -467,6 +467,43 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
         onClose={() => setSizeGuideOpen(false)}
         category={product.category}
       />
+
+      {/* Mobile Sticky Quick Add Bar */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-neutral-950/95 backdrop-blur-md border-t border-neutral-800 flex items-center justify-between gap-3 shadow-2xl">
+        <div>
+          <span className="text-[10px] font-mono text-neutral-400 block uppercase">
+            Size: {selectedSize}
+          </span>
+          <span className="text-sm font-mono font-bold text-white">
+            ₹{product.price.toLocaleString("en-IN")}
+          </span>
+        </div>
+        <button
+          onClick={handleAddToCart}
+          disabled={isOutOfStock}
+          className={`flex-1 flex items-center justify-center space-x-1.5 py-3 rounded-xl text-xs font-mono uppercase font-bold transition shadow-lg cursor-pointer ${
+            isOutOfStock
+              ? "bg-neutral-800 text-neutral-500 cursor-not-allowed"
+              : justAdded
+              ? "bg-emerald-600 text-white"
+              : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-900/40"
+          }`}
+        >
+          {justAdded ? (
+            <>
+              <Check className="w-3.5 h-3.5" />
+              <span>Added to Bag</span>
+            </>
+          ) : isOutOfStock ? (
+            <span>Sold Out</span>
+          ) : (
+            <>
+              <ShoppingBag className="w-3.5 h-3.5" />
+              <span>Add to Bag</span>
+            </>
+          )}
+        </button>
+      </div>
     </div>
   );
 }

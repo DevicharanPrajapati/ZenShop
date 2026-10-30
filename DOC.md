@@ -115,6 +115,38 @@ zenshop/
 * **Hero Experience ([`app/page.tsx`](file:///D:/Projects/E-commerce/zenshop/app/page.tsx))**:
   Full-bleed dark aesthetic with high-contrast typography, capsule drop badges (`DROP 01: MONOLITH`), quick textile specifications, and direct CTAs.
 
+### Dual Theme Architecture (Dark & Light Mode) ([`lib/theme-context.tsx`](file:///D:/Projects/E-commerce/zenshop/lib/theme-context.tsx))
+* **Two Tailored Streetwear Palettes**:
+  * **Obsidian Noir (Dark Mode)**: Deep `#0d0d0f` backdrop with `#141417` card containers, cobalt blue accents, and white high-contrast typography.
+  * **Chalk Editorial (Light Mode)**: Off-white `#fafaf9` architectural gallery aesthetic with `#ffffff` cards, `#e5e5ea` borders, and rich charcoal `#09090b` typography.
+* **Hydration-Safe SSR & Persistence**: Preference is persisted in `localStorage` (`zen_theme`) and syncs automatically with system dark/light preference with zero hydration flickers.
+* **Quick Toggle**: Direct `Sun`/`Moon` switch in desktop navbar and mobile slide-down menu.
+
+### Universal Multi-Device Responsiveness
+* **Mobile Devices (320px – 430px)**:
+  * Full-width fluid product cards with mobile-optimized quick-add touch controls.
+  * Mobile slide-down navigation menu with theme switcher, wishlist, order tracking, and cart triggers.
+  * Sticky bottom purchase action bar on Product Detail Pages (`ProductDetailsClient.tsx`) for instant 1-tap checkout without scrolling.
+  * Responsive checkout and payment selector tabs formatted for touch screens.
+* **Tablets (768px – 1024px)**:
+  * Adaptive 2-column garment grid, side-by-side shipment timeline, and responsive drawer sliding.
+* **Desktop & Ultrawide (1280px+)**:
+  * Full 3-column catalog grid, dual-angle hover transitions, and sticky checkout summaries.
+
+### Production Security Hardening & Zero-Data-Leak Architecture
+* **Strict Git Secret Shielding**:
+  * `.env*` is fully excluded from version control via `.gitignore`, ensuring private service keys and database credentials are never committed.
+  * A public [`.env.example`](file:///D:/Projects/E-commerce/zenshop/.env.example) is maintained for seamless Vercel / Netlify deployment.
+* **Database Row-Level Security (RLS) ([`supabase/02_rls.sql`](file:///D:/Projects/E-commerce/zenshop/supabase/02_rls.sql))**:
+  * Read access (`SELECT`) is open for products and reviews.
+  * Mutation access (`INSERT`, `UPDATE`, `DELETE`) on products and order status is strictly gated to authenticated administrators (`byteadmin` / `role: 'admin'`).
+* **HTTP Security Headers ([`next.config.ts`](file:///D:/Projects/E-commerce/zenshop/next.config.ts))**:
+  * `X-Frame-Options: SAMEORIGIN` (prevents clickjacking attacks).
+  * `X-Content-Type-Options: nosniff` (mitigates MIME-type confusion).
+  * `Strict-Transport-Security` (forces TLS/HTTPS in production).
+  * `Referrer-Policy: strict-origin-when-cross-origin` (prevents URL parameter leaks).
+  * `Permissions-Policy: camera=(), microphone=(), geolocation=()` (restricts unauthorized browser APIs).
+
 ### Dual-Angle Garment Cards ([`components/ProductCard.tsx`](file:///D:/Projects/E-commerce/zenshop/components/ProductCard.tsx))
 * Uses two synchronized Next/Image layers:
   - Layer 1: Front model shot (`opacity-100`, fades on hover).

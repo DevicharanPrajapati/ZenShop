@@ -107,8 +107,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div
           className={`absolute inset-x-3 bottom-3 z-20 transition-all duration-300 ${
             showQuickSizes || isHovered
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4 pointer-events-none"
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 translate-y-4 pointer-events-none sm:opacity-0 sm:translate-y-4 sm:pointer-events-none max-sm:opacity-90 max-sm:translate-y-0 max-sm:pointer-events-auto"
           }`}
         >
           {showQuickSizes ? (

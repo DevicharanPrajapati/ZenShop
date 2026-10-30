@@ -3,14 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, ShoppingBag, Heart, Menu, X, Shield, ArrowRight, User } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X, Shield, ArrowRight, User, Sun, Moon } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { useAuth } from "@/lib/auth-context";
+import { useTheme } from "@/lib/theme-context";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { cartCount, openCart, wishlist } = useStore();
   const { user, isAdmin } = useAuth();
+  const { theme, toggleTheme, isDark } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -85,6 +87,20 @@ export default function Navbar() {
             aria-label="Search garments"
           >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
+
+          {/* Theme Toggle (Dark / Light) */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition"
+            title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
+            aria-label="Toggle theme"
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
+            ) : (
+              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+            )}
           </button>
 
           {/* Wishlist */}
@@ -190,7 +206,35 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="pt-4 border-t border-neutral-900 flex justify-between items-center text-xs font-mono text-neutral-400">
+          {/* Mobile Theme & Utility Bar */}
+          <div className="pt-2 flex items-center justify-between border-b border-neutral-900 pb-3">
+            <button
+              onClick={toggleTheme}
+              className="flex items-center space-x-2 text-xs font-mono text-neutral-300 hover:text-white py-1.5 px-3 rounded-lg bg-neutral-900 border border-neutral-800 transition"
+            >
+              {isDark ? (
+                <>
+                  <Sun className="w-4 h-4 text-amber-400" />
+                  <span>LIGHT MODE</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 text-blue-500" />
+                  <span>DARK MODE</span>
+                </>
+              )}
+            </button>
+            <Link
+              href="/wishlist"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center space-x-1.5 text-xs font-mono text-neutral-400 hover:text-white"
+            >
+              <Heart className="w-3.5 h-3.5" />
+              <span>Wishlist ({wishlist.length})</span>
+            </Link>
+          </div>
+
+          <div className="pt-2 flex justify-between items-center text-xs font-mono text-neutral-400">
             {isAdmin ? (
               <Link
                 href="/admin"

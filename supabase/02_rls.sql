@@ -30,18 +30,27 @@ FOR SELECT
 TO public
 USING (true);
 
--- Allow product creation and updates (for admin dashboard)
+-- Allow product mutations (insert, update, delete) ONLY for authenticated admins
 CREATE POLICY "Admins can manage products"
 ON public.products
 FOR ALL
-TO public
-USING (true);
+TO authenticated
+USING (
+  (auth.jwt() -> 'user_metadata' ->> 'role') = 'admin' OR
+  auth.jwt() ->> 'email' LIKE 'admin@%' OR
+  auth.jwt() ->> 'email' LIKE 'byteadmin@%'
+)
+WITH CHECK (
+  (auth.jwt() -> 'user_metadata' ->> 'role') = 'admin' OR
+  auth.jwt() ->> 'email' LIKE 'admin@%' OR
+  auth.jwt() ->> 'email' LIKE 'byteadmin@%'
+);
 
 -- ========================================================
 -- ORDERS POLICIES
 -- ========================================================
 
--- Allow any user to place an order during checkout
+-- Allow any customer to place an order during checkout
 CREATE POLICY "Public can insert orders"
 ON public.orders
 FOR INSERT
@@ -55,13 +64,21 @@ FOR SELECT
 TO public
 USING (true);
 
--- Allow order status updates (for admin fulfillment pipeline)
+-- Allow order fulfillment status updates ONLY for authenticated admins
 CREATE POLICY "Admins can update orders"
 ON public.orders
 FOR UPDATE
-TO public
-USING (true)
-WITH CHECK (true);
+TO authenticated
+USING (
+  (auth.jwt() -> 'user_metadata' ->> 'role') = 'admin' OR
+  auth.jwt() ->> 'email' LIKE 'admin@%' OR
+  auth.jwt() ->> 'email' LIKE 'byteadmin@%'
+)
+WITH CHECK (
+  (auth.jwt() -> 'user_metadata' ->> 'role') = 'admin' OR
+  auth.jwt() ->> 'email' LIKE 'admin@%' OR
+  auth.jwt() ->> 'email' LIKE 'byteadmin@%'
+);
 
 -- ========================================================
 -- REVIEWS POLICIES

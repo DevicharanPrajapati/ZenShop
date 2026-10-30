@@ -51,7 +51,7 @@ export default function CartDrawer() {
         className="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity animate-fadeIn"
       />
 
-      <div className="fixed inset-y-0 right-0 flex max-w-full pl-10">
+      <div className="fixed inset-y-0 right-0 flex max-w-full pl-4 sm:pl-10">
         <aside className="w-screen max-w-md bg-neutral-950 border-l border-neutral-800 flex flex-col shadow-2xl text-white">
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800">
