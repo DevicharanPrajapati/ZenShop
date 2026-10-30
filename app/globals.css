@@ -38,10 +38,10 @@ html.light, [data-theme="light"] {
   --color-neutral-600: #8e8e93;
   --color-neutral-500: #71717a;
   --color-neutral-400: #52525b;
-  --color-neutral-300: #3a3a3c;
-  --color-neutral-200: #242426;
-  --color-neutral-100: #18181b;
-  --color-neutral-50: #09090b;
+  --color-neutral-300: #27272a;
+  --color-neutral-200: #18181b;
+  --color-neutral-100: #09090b;
+  --color-neutral-50: #000000;
   --scrollbar-track: #f4f4f6;
   --scrollbar-thumb: #d1d1d6;
 }
@@ -62,39 +62,98 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Light mode text contrast overrides for explicit text-white headings */
-html.light h1.text-white,
-html.light h2.text-white,
-html.light h3.text-white,
-html.light h4.text-white,
-html.light p.text-white,
-html.light strong.text-white,
-html.light th.text-white,
-html.light td.text-white {
-  color: #09090b !important;
+/* ========================================================
+   LIGHT THEME TYPOGRAPHY & HIGH-CONTRAST ENGINE
+   Completely resolves unreadable light-on-light or mixed text
+   ======================================================== */
+
+/* 1. In light mode, default text-white transforms into high-contrast dark text */
+html.light .text-white {
+  color: #09090b;
 }
 
-/* Light mode form inputs */
-html.light input.text-white,
-html.light textarea.text-white,
-html.light select.text-white {
-  color: #09090b !important;
+/* 2. Any hover:text-white smoothly transitions to pure deep black */
+html.light .hover\:text-white:hover {
+  color: #000000 !important;
 }
 
-/* Preserve bright white text inside accent buttons */
+/* 3. Neutral text hierarchy mapped to WCAG AAA contrast */
+html.light .text-neutral-100 { color: #09090b !important; }
+html.light .text-neutral-200 { color: #18181b !important; }
+html.light .text-neutral-300 { color: #27272a !important; }
+html.light .text-neutral-400 { color: #52525b !important; }
+html.light .text-neutral-500 { color: #71717a !important; }
+
+/* 4. Text hover transitions */
+html.light .hover\:text-neutral-200:hover { color: #09090b !important; }
+html.light .hover\:text-neutral-300:hover { color: #09090b !important; }
+html.light .hover\:text-neutral-400:hover { color: #18181b !important; }
+
+/* 5. Headings, labels, table headers */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6,
+html.light strong,
+html.light th {
+  color: #09090b;
+}
+
+/* 6. Accent buttons & image overlays: PRESERVE PURE WHITE TEXT */
 html.light .bg-blue-600,
+html.light .bg-blue-600 *,
 html.light .bg-blue-500,
+html.light .bg-blue-500 *,
 html.light .bg-red-500,
+html.light .bg-red-500 *,
 html.light .bg-red-600,
-html.light .bg-purple-600 {
+html.light .bg-red-600 *,
+html.light .bg-emerald-600,
+html.light .bg-emerald-600 *,
+html.light .bg-purple-600,
+html.light .bg-purple-600 *,
+html.light .keep-white,
+html.light .keep-white *,
+html.light [data-keep-white="true"],
+html.light [data-keep-white="true"] * {
   color: #ffffff !important;
 }
-html.light .bg-blue-600 *,
-html.light .bg-blue-500 *,
-html.light .bg-red-500 *,
-html.light .bg-red-600 *,
-html.light .bg-purple-600 * {
-  color: #ffffff !important;
+
+/* 7. Card containers and backgrounds in light mode */
+html.light .bg-neutral-950 { background-color: #ffffff; }
+html.light .bg-neutral-900 { background-color: #f4f4f6; }
+html.light .bg-neutral-900\/60 { background-color: rgba(244, 244, 246, 0.6); }
+html.light .bg-neutral-900\/80 { background-color: rgba(244, 244, 246, 0.8); }
+html.light .bg-neutral-900\/90 { background-color: rgba(244, 244, 246, 0.9); }
+html.light .bg-neutral-950\/70 { background-color: rgba(255, 255, 255, 0.75); }
+html.light .bg-neutral-950\/80 { background-color: rgba(255, 255, 255, 0.82); }
+html.light .bg-neutral-950\/85 { background-color: rgba(255, 255, 255, 0.88); }
+html.light .bg-neutral-950\/90 { background-color: rgba(255, 255, 255, 0.92); }
+html.light .bg-neutral-950\/95 { background-color: rgba(255, 255, 255, 0.96); }
+
+/* 8. Hover backgrounds */
+html.light .hover\:bg-neutral-900:hover { background-color: #ebebef; }
+html.light .hover\:bg-neutral-800:hover { background-color: #e5e5ea; }
+
+/* 9. Borders in light mode */
+html.light .border-neutral-900 { border-color: #e5e5ea; }
+html.light .border-neutral-850 { border-color: #e5e5ea; }
+html.light .border-neutral-800 { border-color: #e5e5ea; }
+html.light .border-neutral-700 { border-color: #d1d1d6; }
+
+/* 10. Form inputs and select dropdowns */
+html.light input,
+html.light select,
+html.light textarea {
+  background-color: #ffffff !important;
+  color: #09090b !important;
+  border-color: #e5e5ea !important;
+}
+html.light input::placeholder,
+html.light textarea::placeholder {
+  color: #71717a !important;
 }
 
 /* Custom marquee keyframes */

@@ -20,8 +20,8 @@ export default function Home() {
             priority
             className="object-cover object-center opacity-30 scale-105 transition-transform duration-1000 ease-out"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0d0d0f] via-[#0d0d0f]/60 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#0d0d0f_100%)] opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-[var(--background)]/60 to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--background)_100%)] opacity-80" />
         </div>
 
         {/* Hero Content */}
@@ -35,8 +35,8 @@ export default function Home() {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-mono tracking-tighter text-white uppercase max-w-5xl leading-none">
-            ARCHITECTURAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-300 to-neutral-500">STREETWEAR</span>
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-mono tracking-tighter text-white uppercase max-w-5xl leading-none">
+            ARCHITECTURAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 via-neutral-700 to-neutral-500 dark:from-white dark:via-neutral-300 dark:to-neutral-500">STREETWEAR</span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-sm sm:text-base md:text-lg text-neutral-400 font-sans font-normal leading-relaxed">
@@ -145,7 +145,7 @@ export default function Home() {
                 className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-60"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+              <div data-keep-white="true" className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                 <div>
                   <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400">
                     280 GSM Cotton
@@ -173,7 +173,7 @@ export default function Home() {
                 className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-60"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+              <div data-keep-white="true" className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                 <div>
                   <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400">
                     380 GSM Loopback
@@ -201,7 +201,7 @@ export default function Home() {
                 className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-60"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
+              <div data-keep-white="true" className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
                 <div>
                   <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400">
                     Utility Ripstop
