@@ -11,6 +11,7 @@ import {
   ArrowLeft,
   CheckCircle2,
   ShieldCheck,
+  Shield,
   LogOut,
   Sparkles,
 } from "lucide-react";
@@ -21,8 +22,16 @@ function LoginContent() {
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("redirect") || "/";
 
-  const { user, signInWithEmail, signUpWithEmail, signInWithGithub, signOut, isConfigured } =
-    useAuth();
+  const {
+    user,
+    role,
+    isAdmin,
+    signInWithEmail,
+    signUpWithEmail,
+    signInWithGithub,
+    signOut,
+    isConfigured,
+  } = useAuth();
 
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [fullName, setFullName] = useState("");
@@ -90,9 +99,20 @@ function LoginContent() {
             <UserIcon className="w-8 h-8" />
           </div>
 
-          <span className="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">
-            STUDIO ACCOUNT ACTIVE
-          </span>
+          <div className="flex items-center justify-center space-x-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">
+              STUDIO ACCOUNT ACTIVE
+            </span>
+            <span
+              className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded font-bold border ${
+                isAdmin
+                  ? "bg-purple-950/70 border-purple-600/60 text-purple-300"
+                  : "bg-blue-950/70 border-blue-600/60 text-blue-300"
+              }`}
+            >
+              ROLE: {user.role?.toUpperCase() || "USER"}
+            </span>
+          </div>
 
           <h1 className="text-2xl font-mono font-black text-white uppercase">
             {user.fullName || "Streetwear Patron"}
@@ -103,6 +123,16 @@ function LoginContent() {
           </p>
 
           <div className="pt-4 flex flex-col gap-3 font-mono text-xs">
+            {isAdmin && (
+              <Link
+                href="/admin"
+                className="w-full flex items-center justify-center space-x-2 bg-purple-600 hover:bg-purple-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-purple-900/30 font-mono text-xs uppercase"
+              >
+                <Shield className="w-4 h-4" />
+                <span>Launch Admin Dashboard</span>
+              </Link>
+            )}
+
             <Link
               href="/orders"
               className="w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-blue-900/30"

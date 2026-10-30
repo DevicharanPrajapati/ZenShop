@@ -142,8 +142,12 @@ zenshop/
   4. *Arrived at Regional Distribution Hub (Delhi / Gurugram)*
   5. *Out for Doorstep Delivery with OTP Verification*
 
-### Administrative Control Portal ([`app/admin/page.tsx`](file:///D:/Projects/E-commerce/zenshop/app/admin/page.tsx))
-* An essential portfolio showcase demonstrating full-stack thinking:
+### Administrative Control Portal & Strict RBAC ([`app/admin/page.tsx`](file:///D:/Projects/E-commerce/zenshop/app/admin/page.tsx))
+* Essential portfolio showcase demonstrating full-stack authorization and role-based access control (RBAC):
+  * **Strict Two-Role Policy**: Explicitly partitioned into `admin` and `user` roles.
+  * **Hidden from Storefront**: The admin portal is concealed from unauthenticated visitors and standard customer views. Only authenticated admin sessions reveal the management link in the navbar.
+  * **401 Unauthorized Gate**: Unauthenticated visitors attempting direct navigation to `/admin` are intercepted with an administrative login prompt and redirect flow.
+  * **403 Forbidden Gate**: Customers signed in with the `user` role are denied entry with a security notice explaining their role restriction.
   * **Metric Counters**: Gross Revenue (`₹3,48,250+`), Total Orders, Average Order Value (`₹2,850`), and Low Stock Alerts.
   * **Inventory Table**: Live view of all styles, categories, prices, fabric weights, and stock levels broken down by size (`S:5`, `M:2`, `L:8`, etc.).
   * **Order Fulfillment Pipeline**: Customer orders with a live status dropdown to transition packages from *Processing* ➔ *Dispatched* ➔ *Delivered*.

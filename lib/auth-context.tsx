@@ -4,10 +4,13 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import type { User, Session } from "@supabase/supabase-js";
 import { supabase, isSupabaseConfigured } from "./supabase";
 
+export type UserRole = "admin" | "user";
+
 export type StudioUser = {
   id: string;
   email: string;
   fullName?: string;
+  role: UserRole;
 };
 
 interface AuthContextType {
@@ -15,6 +18,9 @@ interface AuthContextType {
   session: Session | null;
   isLoading: boolean;
   isConfigured: boolean;
+  role: UserRole | null;
+  isAdmin: boolean;
+  isUser: boolean;
   signInWithEmail: (email: string, password: string) => Promise<{ error: string | null }>;
   signUpWithEmail: (
     email: string,
@@ -26,6 +32,16 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const determineRole = (email?: string, metaRole?: string): UserRole => {
+  if (metaRole === "admin") return "admin";
+  if (!email) return "user";
+  const normalized = email.toLowerCase().trim();
+  const configuredAdmin = process.env.NEXT_PUBLIC_ADMIN_EMAIL?.toLowerCase()?.trim() || "admin@zenstudio.in";
+  if (configuredAdmin && normalized === configuredAdmin) return "admin";
+  if (normalized.startsWith("admin@")) return "admin";
+  return "user";
+};
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<StudioUser | null>(null);
@@ -39,7 +55,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         const demoUser = localStorage.getItem("zen_demo_user");
         if (demoUser) {
-          setUser(JSON.parse(demoUser));
+          const parsed = JSON.parse(demoUser);
+          setUser({
+            ...parsed,
+            role: determineRole(parsed.email, parsed.role),
+          });
         }
       } catch {
         // Ignore
@@ -52,10 +72,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       if (session?.user) {
+        const email = session.user.email || "";
+        const role = determineRole(email, session.user.user_metadata?.role);
         setUser({
           id: session.user.id,
-          email: session.user.email || "",
-          fullName: session.user.user_metadata?.full_name || session.user.email?.split("@")[0],
+          email,
+          fullName: session.user.user_metadata?.full_name || email.split("@")[0],
+          role,
         });
       }
       setIsLoading(false);
@@ -67,10 +90,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (session?.user) {
+        const email = session.user.email || "";
+        const role = determineRole(email, session.user.user_metadata?.role);
         setUser({
           id: session.user.id,
-          email: session.user.email || "",
-          fullName: session.user.user_metadata?.full_name || session.user.email?.split("@")[0],
+          email,
+          fullName: session.user.user_metadata?.full_name || email.split("@")[0],
+          role,
         });
       } else {
         setUser(null);
@@ -84,12 +110,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signInWithEmail = async (email: string, password: string) => {
+    const trimmedEmail = email.trim();
     if (!supabase) {
       // Demo simulated login
       const demo: StudioUser = {
         id: "demo-user-1",
-        email,
-        fullName: email.split("@")[0],
+        email: trimmedEmail,
+        fullName: trimmedEmail.split("@")[0],
+        role: determineRole(trimmedEmail),
       };
       setUser(demo);
       try {
@@ -100,7 +128,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
+        email: trimmedEmail,
         password,
       });
 
@@ -128,10 +156,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (data.user) {
+        const email = data.user.email || trimmedEmail;
+        const role = determineRole(email, data.user.user_metadata?.role);
         setUser({
           id: data.user.id,
-          email: data.user.email || "",
-          fullName: data.user.user_metadata?.full_name || data.user.email?.split("@")[0],
+          email,
+          fullName: data.user.user_metadata?.full_name || email.split("@")[0],
+          role,
         });
       }
 
@@ -142,11 +173,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signUpWithEmail = async (email: string, password: string, fullName: string) => {
+    const trimmedEmail = email.trim();
+    const role = determineRole(trimmedEmail);
+
     if (!supabase) {
       const demo: StudioUser = {
         id: "demo-user-1",
-        email,
+        email: trimmedEmail,
         fullName,
+        role,
       };
       setUser(demo);
       try {
@@ -157,11 +192,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const { data, error } = await supabase.auth.signUp({
-        email: email.trim(),
+        email: trimmedEmail,
         password,
         options: {
           data: {
             full_name: fullName.trim(),
+            role,
           },
         },
       });
@@ -192,8 +228,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (data.user && hasSession) {
         setUser({
           id: data.user.id,
-          email: data.user.email || "",
+          email: data.user.email || trimmedEmail,
           fullName: fullName.trim(),
+          role,
         });
       }
 
@@ -209,6 +246,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         id: "demo-github-user",
         email: "developer@github.com",
         fullName: "GitHub Developer",
+        role: "user",
       };
       setUser(demo);
       try {
@@ -243,6 +281,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   };
 
+  const role: UserRole | null = user?.role || null;
+  const isAdmin = role === "admin";
+  const isUser = role === "user";
+
   return (
     <AuthContext.Provider
       value={{
@@ -250,6 +292,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         session,
         isLoading,
         isConfigured: isSupabaseConfigured,
+        role,
+        isAdmin,
+        isUser,
         signInWithEmail,
         signUpWithEmail,
         signInWithGithub,

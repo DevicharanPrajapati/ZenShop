@@ -145,8 +145,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/admin" className="text-blue-400 hover:text-blue-300 transition">
-                  Admin Portal (Resume)
+                <Link href="/login" className="hover:text-white transition">
+                  Studio Account
                 </Link>
               </li>
             </ul>

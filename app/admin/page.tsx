@@ -14,11 +14,16 @@ import {
   Edit2,
   Trash2,
   Sparkles,
+  Lock,
+  ShieldAlert,
+  ArrowRight,
 } from "lucide-react";
 import { products as initialProducts, type Product } from "@/lib/products";
 import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth-context";
 
 export default function AdminPage() {
+  const { user, isAdmin, isLoading, signOut } = useAuth();
   const [productList, setProductList] = useState<Product[]>(initialProducts);
   const [activeTab, setActiveTab] = useState<"inventory" | "orders">("inventory");
 
@@ -117,6 +122,97 @@ export default function AdminPage() {
     setProductList((prev) => prev.filter((p) => p.id !== productId));
   };
 
+  // 1. Loading State Gate
+  if (isLoading) {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
+        <div className="w-12 h-12 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center animate-pulse">
+          <Lock className="w-5 h-5 text-blue-500" />
+        </div>
+        <p className="text-xs font-mono uppercase tracking-widest text-neutral-400">
+          Verifying administrative credentials...
+        </p>
+      </div>
+    );
+  }
+
+  // 2. Unauthenticated Gate (401)
+  if (!user) {
+    return (
+      <div className="min-h-[75vh] w-full flex items-center justify-center px-4 py-16">
+        <div className="w-full max-w-md rounded-3xl border border-neutral-800 bg-neutral-950 p-8 text-center shadow-2xl space-y-6">
+          <div className="w-16 h-16 rounded-2xl bg-amber-950/40 border border-amber-500/30 flex items-center justify-center mx-auto text-amber-400">
+            <Lock className="w-8 h-8" />
+          </div>
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold">
+              401 UNAUTHORIZED // AUTHENTICATION REQUIRED
+            </span>
+            <h1 className="text-2xl font-mono font-black text-white uppercase mt-2">
+              ADMIN ACCESS RESTRICTED
+            </h1>
+            <p className="text-xs text-neutral-400 font-sans mt-2 leading-relaxed">
+              You must sign in with an authorized Studio Admin account to view telemetry and manage inventory.
+            </p>
+          </div>
+          <div className="pt-2 flex flex-col gap-3 font-mono text-xs">
+            <Link
+              href="/login?redirect=/admin"
+              className="w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition shadow-lg shadow-blue-900/30"
+            >
+              <span>Sign In as Admin</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/"
+              className="w-full flex items-center justify-center space-x-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 py-3.5 rounded-xl transition"
+            >
+              <span>Return to Storefront</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. User Logged In but Role is 'user' (403 Forbidden)
+  if (!isAdmin) {
+    return (
+      <div className="min-h-[75vh] w-full flex items-center justify-center px-4 py-16">
+        <div className="w-full max-w-md rounded-3xl border border-red-900/40 bg-neutral-950 p-8 text-center shadow-2xl space-y-6">
+          <div className="w-16 h-16 rounded-2xl bg-red-950/50 border border-red-500/40 flex items-center justify-center mx-auto text-red-400">
+            <ShieldAlert className="w-8 h-8" />
+          </div>
+          <div>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-red-400 font-bold">
+              403 FORBIDDEN // ROLE RESTRICTION
+            </span>
+            <h1 className="text-2xl font-mono font-black text-white uppercase mt-2">
+              ADMIN ROLE REQUIRED
+            </h1>
+            <p className="text-xs text-neutral-400 font-sans mt-2 leading-relaxed">
+              Your account (<strong className="text-white">{user.email}</strong>) has the <strong className="text-blue-400 font-mono">user</strong> role. Administrator privileges are required to access this control suite.
+            </p>
+          </div>
+          <div className="pt-2 flex flex-col gap-3 font-mono text-xs">
+            <button
+              onClick={() => signOut()}
+              className="w-full flex items-center justify-center space-x-2 bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 text-neutral-200 py-3.5 rounded-xl transition cursor-pointer"
+            >
+              <span>Sign Out / Switch to Admin</span>
+            </button>
+            <Link
+              href="/"
+              className="w-full flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition"
+            >
+              <span>Continue Shopping as User</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       {/* Back button */}
@@ -133,7 +229,14 @@ export default function AdminPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-neutral-900 pb-6 mb-8 gap-4">
         <div>
-          <span className="text-xs font-mono uppercase tracking-widest text-blue-500 font-bold">
+          <div className="flex items-center space-x-2 text-xs font-mono mb-2">
+            <span className="bg-blue-950/80 border border-blue-800 text-blue-400 px-2 py-0.5 rounded font-bold uppercase">
+              ROLE: ADMIN
+            </span>
+            <span className="text-neutral-500">•</span>
+            <span className="text-neutral-400 truncate max-w-xs">{user?.email}</span>
+          </div>
+          <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 font-bold">
             STUDIO CONTROL CENTER
           </span>
           <h1 className="text-2xl sm:text-3xl font-mono font-black uppercase text-white tracking-tight mt-1">

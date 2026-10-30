@@ -10,7 +10,7 @@ import { useAuth } from "@/lib/auth-context";
 export default function Navbar() {
   const pathname = usePathname();
   const { cartCount, openCart, wishlist } = useStore();
-  const { user } = useAuth();
+  const { user, isAdmin } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -133,15 +133,17 @@ export default function Navbar() {
             </span>
           </button>
 
-          {/* Admin Link (Resume Showcase) */}
-          <Link
-            href="/admin"
-            className="hidden lg:flex items-center space-x-1.5 text-[11px] font-mono tracking-wider text-neutral-400 hover:text-neutral-200 border border-dashed border-neutral-700 px-2.5 py-1.5 rounded hover:border-neutral-500 transition"
-            title="Admin Portal"
-          >
-            <Shield className="w-3.5 h-3.5 text-blue-400" />
-            <span>ADMIN</span>
-          </Link>
+          {/* Admin Link (Only for authorized admin users) */}
+          {isAdmin && (
+            <Link
+              href="/admin"
+              className="hidden lg:flex items-center space-x-1.5 text-[11px] font-mono tracking-wider text-blue-400 hover:text-blue-300 border border-blue-800 bg-blue-950/40 px-2.5 py-1.5 rounded transition"
+              title="Studio Admin Portal"
+            >
+              <Shield className="w-3.5 h-3.5 text-blue-400" />
+              <span>ADMIN</span>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -189,14 +191,24 @@ export default function Navbar() {
           </div>
 
           <div className="pt-4 border-t border-neutral-900 flex justify-between items-center text-xs font-mono text-neutral-400">
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center space-x-1.5 text-blue-400 hover:underline"
-            >
-              <Shield className="w-3.5 h-3.5" />
-              <span>Admin Management</span>
-            </Link>
+            {isAdmin ? (
+              <Link
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center space-x-1.5 text-blue-400 hover:underline"
+              >
+                <Shield className="w-3.5 h-3.5" />
+                <span>Admin Management</span>
+              </Link>
+            ) : (
+              <Link
+                href="/products"
+                onClick={() => setMobileMenuOpen(false)}
+                className="hover:underline"
+              >
+                Explore Capsule
+              </Link>
+            )}
             <Link
               href="/orders"
               onClick={() => setMobileMenuOpen(false)}
