@@ -240,7 +240,7 @@ The platform is integrated with **Supabase** via `@supabase/supabase-js`, comple
 
 ### Authentication System (`lib/auth-context.tsx` & `/login`)
 - **Email & Password**: User registration with full name and secure credential authentication via Supabase Auth.
-- **Google OAuth**: One-click Google sign-in provider.
+- **GitHub OAuth (100% Free, Zero-Card)**: One-click GitHub sign-in provider, popular on developer and design portfolios.
 - **Session Persistence**: Sessions sync with browser storage and auto-refresh in the background.
 - **Navbar Profile Integration**: Shows user avatar, initials, or patron name with a quick account management drawer.
 - **Checkout Auto-Fill**: Automatically fills customer name and email in the `/checkout` shipping form if authenticated.

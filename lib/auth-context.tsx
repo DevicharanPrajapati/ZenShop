@@ -17,7 +17,7 @@ interface AuthContextType {
   isConfigured: boolean;
   signInWithEmail: (email: string, password: string) => Promise<{ error: string | null }>;
   signUpWithEmail: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>;
-  signInWithGoogle: () => Promise<{ error: string | null }>;
+  signInWithGithub: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 }
 
@@ -161,12 +161,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGithub = async () => {
     if (!supabase) {
       const demo: StudioUser = {
-        id: "demo-google-user",
-        email: "collector@zenstudio.in",
-        fullName: "Studio Collector",
+        id: "demo-github-user",
+        email: "developer@github.com",
+        fullName: "GitHub Developer",
       };
       setUser(demo);
       try {
@@ -177,7 +177,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
+        provider: "github",
         options: {
           redirectTo: typeof window !== "undefined" ? `${window.location.origin}/login` : undefined,
         },
@@ -186,7 +186,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (error) return { error: error.message };
       return { error: null };
     } catch (err: any) {
-      return { error: err.message || "Google OAuth error." };
+      return { error: err.message || "GitHub OAuth error." };
     }
   };
 
@@ -210,7 +210,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isConfigured: isSupabaseConfigured,
         signInWithEmail,
         signUpWithEmail,
-        signInWithGoogle,
+        signInWithGithub,
         signOut,
       }}
     >
