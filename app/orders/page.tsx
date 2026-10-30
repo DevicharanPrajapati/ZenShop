@@ -85,14 +85,14 @@ export default function OrdersPage() {
         </Link>
       </div>
 
-      <div className="mb-8 border-b border-neutral-900 pb-4">
+      <div className="mb-8 border-b border-neutral-200 dark:border-neutral-900 pb-4">
         <span className="text-xs font-mono uppercase tracking-widest text-blue-500 font-bold">
           LIVE SHIPMENT CONCIERGE
         </span>
-        <h1 className="text-2xl sm:text-4xl font-mono font-bold uppercase text-white tracking-tight mt-1">
+        <h1 className="text-2xl sm:text-4xl font-mono font-bold uppercase text-neutral-950 dark:text-white tracking-tight mt-1">
           TRACK YOUR DROP ORDER
         </h1>
-        <p className="text-xs text-neutral-400 mt-1 font-sans">
+        <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 font-sans">
           Real-time courier telemetry powered by our Indian logistics network.
         </p>
       </div>
@@ -107,7 +107,7 @@ export default function OrdersPage() {
               value={trackingId}
               onChange={(e) => setTrackingId(e.target.value)}
               placeholder="Enter Order ID (e.g. ZEN-849201)"
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-xs font-mono uppercase text-white focus:outline-none focus:border-blue-500"
+              className="w-full bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 rounded-xl pl-10 pr-4 py-3 text-xs font-mono uppercase text-neutral-950 dark:text-white focus:outline-none focus:border-blue-500"
             />
           </div>
           <button
@@ -120,19 +120,19 @@ export default function OrdersPage() {
       </form>
 
       {/* Active Order Card */}
-      <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8 space-y-8 shadow-2xl">
+      <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 sm:p-8 space-y-8 shadow-2xl">
         {/* Status Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-900 pb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-200 dark:border-neutral-900 pb-6">
           <div>
             <div className="flex items-center space-x-2 text-xs font-mono">
               <span className="text-neutral-500">ORDER:</span>
-              <span className="font-bold text-white tracking-wider">{activeOrder.id}</span>
-              <span className="bg-blue-950/80 border border-blue-800 text-blue-400 px-2 py-0.5 rounded text-[10px]">
+              <span className="font-bold text-neutral-950 dark:text-white tracking-wider">{activeOrder.id}</span>
+              <span className="bg-blue-100 text-blue-800 border border-blue-300 dark:bg-blue-950/80 dark:border-blue-800 dark:text-blue-400 px-2 py-0.5 rounded text-[10px]">
                 {activeOrder.status}
               </span>
             </div>
-            <p className="text-sm font-semibold text-white mt-1">
-              Estimated Delivery: <span className="text-blue-400">{activeOrder.estimatedDelivery}</span>
+            <p className="text-sm font-semibold text-neutral-950 dark:text-white mt-1">
+              Estimated Delivery: <span className="text-blue-500">{activeOrder.estimatedDelivery}</span>
             </p>
           </div>
 
@@ -162,7 +162,7 @@ export default function OrdersPage() {
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3">
                   <h3
                     className={`text-xs font-mono font-bold uppercase ${
-                      step.completed ? "text-white" : "text-neutral-500"
+                      step.completed ? "text-neutral-950 dark:text-white" : "text-neutral-500"
                     }`}
                   >
                     {step.title}

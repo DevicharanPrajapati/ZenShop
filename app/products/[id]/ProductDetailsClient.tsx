@@ -144,14 +144,14 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
               <span>{product.fit}</span>
             </div>
 
-            <h1 className="mt-2 text-2xl sm:text-3xl font-mono font-bold uppercase text-white tracking-tight leading-tight">
+            <h1 className="mt-2 text-2xl sm:text-3xl font-mono font-bold uppercase text-neutral-950 dark:text-white tracking-tight leading-tight">
               {product.name}
             </h1>
 
             {/* Price & Rating */}
-            <div className="mt-4 flex items-center justify-between pb-4 border-b border-neutral-800">
+            <div className="mt-4 flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800">
               <div className="flex items-baseline space-x-3">
-                <span className="text-2xl font-mono font-black text-white">
+                <span className="text-2xl font-mono font-black text-neutral-950 dark:text-white">
                   ₹{product.price.toLocaleString("en-IN")}
                 </span>
                 {product.originalPrice > product.price && (
@@ -160,16 +160,16 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
                   </span>
                 )}
                 {discountPercent > 0 && (
-                  <span className="bg-emerald-950/80 border border-emerald-800 text-emerald-400 text-xs font-mono font-bold px-2 py-0.5 rounded">
+                  <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 dark:bg-emerald-950/80 dark:border-emerald-800 dark:text-emerald-400 text-xs font-mono font-bold px-2 py-0.5 rounded">
                     {discountPercent}% OFF
                   </span>
                 )}
               </div>
 
               {/* Star Rating */}
-              <div className="flex items-center space-x-1.5 text-xs font-mono text-neutral-400">
+              <div className="flex items-center space-x-1.5 text-xs font-mono text-neutral-600 dark:text-neutral-400">
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                <span className="text-white font-bold">{product.rating}</span>
+                <span className="text-neutral-950 dark:text-white font-bold">{product.rating}</span>
                 <span>({product.reviewCount})</span>
               </div>
             </div>

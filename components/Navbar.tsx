@@ -3,7 +3,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, ShoppingBag, Heart, Menu, X, Shield, ArrowRight, User, Sun, Moon } from "lucide-react";
+import {
+  Search,
+  ShoppingBag,
+  Heart,
+  Menu,
+  X,
+  Shield,
+  ArrowRight,
+  User,
+  Sun,
+  Moon,
+} from "lucide-react";
 import { useStore } from "@/lib/store";
 import { useAuth } from "@/lib/auth-context";
 import { useTheme } from "@/lib/theme-context";
@@ -33,7 +44,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-neutral-950/85 border-b border-neutral-800 transition-colors">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/95 dark:bg-neutral-950/90 border-b border-neutral-200 dark:border-neutral-800 transition-colors">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-18">
         {/* Left: Mobile Menu Toggle & Brand */}
         <div className="flex items-center space-x-3 sm:space-x-4">
@@ -47,17 +58,17 @@ export default function Navbar() {
 
           <Link href="/" className="group flex items-center space-x-2.5">
             {/* Architectural Monogram Logo Mark */}
-            <div className="w-8 h-8 rounded-xl bg-neutral-900 dark:bg-neutral-900 border border-neutral-700/80 dark:border-neutral-700 flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 group-hover:border-blue-500 transition-all">
+            <div className="w-8 h-8 rounded-xl bg-black dark:bg-neutral-900 border border-neutral-800 dark:border-neutral-700 flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 group-hover:border-blue-500 transition-all">
               <span className="font-mono font-black text-xs text-white">Z</span>
               <span className="text-blue-500 font-bold text-xs">/</span>
               <span className="font-mono font-black text-xs text-white">S</span>
             </div>
 
             <div className="flex items-baseline space-x-2">
-              <span className="text-xl sm:text-2xl font-black tracking-tighter text-neutral-950 dark:text-white font-mono uppercase group-hover:opacity-85 transition">
+              <span className="text-xl sm:text-2xl font-black tracking-tighter text-black dark:text-white font-mono uppercase group-hover:opacity-80 transition">
                 ZEN<span className="text-blue-500">/</span>STUDIO
               </span>
-              <span className="hidden sm:inline-block text-[9px] uppercase tracking-widest font-mono text-neutral-600 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 px-1.5 py-0.5 rounded">
+              <span className="hidden sm:inline-block text-[9px] uppercase tracking-widest font-mono text-neutral-700 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 px-1.5 py-0.5 rounded">
                 IND
               </span>
             </div>
@@ -75,7 +86,7 @@ export default function Navbar() {
                 className={`text-xs font-mono tracking-widest uppercase transition-colors relative py-1 ${
                   isActive
                     ? "text-blue-600 dark:text-blue-400 font-bold"
-                    : "text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+                    : "text-neutral-800 hover:text-black dark:text-neutral-300 dark:hover:text-white"
                 }`}
               >
                 {link.name}
@@ -92,7 +103,7 @@ export default function Navbar() {
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
+            className="p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             aria-label="Search garments"
           >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -101,21 +112,21 @@ export default function Navbar() {
           {/* Theme Toggle (Dark / Light) */}
           <button
             onClick={toggleTheme}
-            className="p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
+            className="p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
             aria-label="Toggle theme"
           >
             {isDark ? (
-              <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
+              <Sun className="w-4 h-4 sm:w-5 sm:h-5 text-amber-500" />
             ) : (
-              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+              <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
             )}
           </button>
 
           {/* Wishlist */}
           <Link
             href="/wishlist"
-            className="relative p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
+            className="relative p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             aria-label="Wishlist"
           >
             <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -132,14 +143,14 @@ export default function Navbar() {
             className={`flex items-center space-x-1.5 rounded-lg transition ${
               user
                 ? "bg-blue-100 text-blue-800 border border-blue-300 dark:bg-blue-950/60 dark:border-blue-800 dark:text-blue-300 px-2.5 py-1.5 text-xs font-mono"
-                : "p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900"
+                : "p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900"
             }`}
             title={user ? `Signed in as ${user.email}` : "Sign in to Studio"}
             aria-label="Account Login"
           >
             <User className="w-4 h-4" />
             {user && (
-              <span className="hidden sm:inline-block max-w-[70px] truncate font-bold">
+              <span className="hidden sm:inline-block max-w-[70px] truncate font-bold text-neutral-900 dark:text-white">
                 {user.fullName || "Patron"}
               </span>
             )}
@@ -148,11 +159,13 @@ export default function Navbar() {
           {/* Cart Bag Trigger */}
           <button
             onClick={openCart}
-            className="relative flex items-center space-x-2 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700/60 px-3 py-2 rounded-lg text-neutral-900 dark:text-white transition group"
+            className="relative flex items-center space-x-2 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700/60 px-3 py-2 rounded-lg transition group"
             aria-label="Open shopping bag"
           >
-            <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span className="text-xs font-mono tracking-wider font-semibold text-neutral-900 dark:text-white">BAG</span>
+            <ShoppingBag className="w-4 h-4 text-neutral-900 dark:text-white group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-mono tracking-wider font-semibold text-neutral-900 dark:text-white">
+              BAG
+            </span>
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[11px] font-bold text-white">
               {cartCount}
             </span>
@@ -162,10 +175,10 @@ export default function Navbar() {
           {isAdmin && (
             <Link
               href="/admin"
-              className="hidden lg:flex items-center space-x-1.5 text-[11px] font-mono tracking-wider text-blue-400 hover:text-blue-300 border border-blue-800 bg-blue-950/40 px-2.5 py-1.5 rounded transition"
+              className="hidden lg:flex items-center space-x-1.5 text-[11px] font-mono tracking-wider text-blue-600 dark:text-blue-400 hover:underline border border-blue-300 dark:border-blue-800 bg-blue-50 dark:bg-blue-950/40 px-2.5 py-1.5 rounded transition"
               title="Studio Admin Portal"
             >
-              <Shield className="w-3.5 h-3.5 text-blue-400" />
+              <Shield className="w-3.5 h-3.5" />
               <span>ADMIN</span>
             </Link>
           )}
@@ -174,18 +187,18 @@ export default function Navbar() {
 
       {/* Expandable Search Input Bar */}
       {searchOpen && (
-        <div className="border-t border-neutral-800 bg-neutral-900/95 px-4 py-3 sm:px-8 animate-fadeIn">
+        <div className="border-t border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 px-4 py-3 sm:px-8 animate-fadeIn">
           <form
             onSubmit={handleSearchSubmit}
             className="mx-auto flex max-w-3xl items-center relative"
           >
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-500" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search heavyweight tees, cargos, hoodies, accessories..."
-              className="w-full bg-neutral-950 border border-neutral-700 rounded-lg py-2.5 pl-10 pr-24 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 font-sans"
+              className="w-full bg-neutral-50 dark:bg-neutral-950 border border-neutral-300 dark:border-neutral-700 rounded-lg py-2.5 pl-10 pr-24 text-sm text-neutral-950 dark:text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500 font-sans"
               autoFocus
             />
             <button
@@ -200,35 +213,35 @@ export default function Navbar() {
 
       {/* Mobile Slide-down Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-neutral-800 bg-neutral-950 px-6 py-6 space-y-4">
+        <div className="md:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 px-6 py-6 space-y-4 shadow-xl">
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between text-sm font-mono tracking-widest text-neutral-200 hover:text-white py-2 border-b border-neutral-900"
+                className="flex items-center justify-between text-sm font-mono tracking-widest text-neutral-900 dark:text-neutral-200 hover:text-black dark:hover:text-white py-2 border-b border-neutral-200 dark:border-neutral-900"
               >
                 <span>{link.name}</span>
-                <ArrowRight className="w-4 h-4 text-neutral-600" />
+                <ArrowRight className="w-4 h-4 text-neutral-400 dark:text-neutral-600" />
               </Link>
             ))}
           </div>
 
           {/* Mobile Theme & Utility Bar */}
-          <div className="pt-2 flex items-center justify-between border-b border-neutral-900 pb-3">
+          <div className="pt-2 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-900 pb-3">
             <button
               onClick={toggleTheme}
-              className="flex items-center space-x-2 text-xs font-mono text-neutral-300 hover:text-white py-1.5 px-3 rounded-lg bg-neutral-900 border border-neutral-800 transition"
+              className="flex items-center space-x-2 text-xs font-mono text-neutral-900 dark:text-neutral-300 py-1.5 px-3 rounded-lg bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 transition"
             >
               {isDark ? (
                 <>
-                  <Sun className="w-4 h-4 text-amber-400" />
+                  <Sun className="w-4 h-4 text-amber-500" />
                   <span>LIGHT MODE</span>
                 </>
               ) : (
                 <>
-                  <Moon className="w-4 h-4 text-blue-500" />
+                  <Moon className="w-4 h-4 text-blue-600" />
                   <span>DARK MODE</span>
                 </>
               )}
@@ -236,19 +249,19 @@ export default function Navbar() {
             <Link
               href="/wishlist"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center space-x-1.5 text-xs font-mono text-neutral-400 hover:text-white"
+              className="flex items-center space-x-1.5 text-xs font-mono text-neutral-700 dark:text-neutral-400 hover:text-black dark:hover:text-white"
             >
               <Heart className="w-3.5 h-3.5" />
               <span>Wishlist ({wishlist.length})</span>
             </Link>
           </div>
 
-          <div className="pt-2 flex justify-between items-center text-xs font-mono text-neutral-400">
+          <div className="pt-2 flex justify-between items-center text-xs font-mono text-neutral-700 dark:text-neutral-400">
             {isAdmin ? (
               <Link
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center space-x-1.5 text-blue-400 hover:underline"
+                className="flex items-center space-x-1.5 text-blue-600 dark:text-blue-400 hover:underline"
               >
                 <Shield className="w-3.5 h-3.5" />
                 <span>Admin Management</span>

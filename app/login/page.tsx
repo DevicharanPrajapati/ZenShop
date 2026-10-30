@@ -174,20 +174,20 @@ function LoginContent() {
         </Link>
       </div>
 
-      <div className="rounded-3xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
+      <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
         {/* Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-1.5 bg-blue-500/40 blur-md" />
 
         {/* Title & Subhead */}
         <div className="text-center space-y-1.5">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 font-bold flex items-center justify-center space-x-1">
-            <Sparkles className="w-3 h-3 text-blue-400" />
+          <span className="text-[10px] font-mono uppercase tracking-widest text-blue-500 font-bold flex items-center justify-center space-x-1">
+            <Sparkles className="w-3 h-3 text-blue-500" />
             <span>SUPABASE AUTHENTICATION</span>
           </span>
-          <h1 className="text-2xl font-mono font-black text-white uppercase tracking-tight">
+          <h1 className="text-2xl font-mono font-black text-neutral-950 dark:text-white uppercase tracking-tight">
             {mode === "signin" ? "STUDIO SIGN IN" : "JOIN THE VAULT"}
           </h1>
-          <p className="text-xs text-neutral-400 font-sans">
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 font-sans">
             {mode === "signin"
               ? "Access your saved capsule drops, tracking, and fast checkout."
               : "Register to unlock VIP private drop access and pre-orders."}
@@ -195,7 +195,7 @@ function LoginContent() {
         </div>
 
         {/* Mode Toggle Tabs */}
-        <div className="flex bg-neutral-900 p-1 rounded-xl border border-neutral-850 text-xs font-mono">
+        <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-xl border border-neutral-300 dark:border-neutral-850 text-xs font-mono">
           <button
             type="button"
             onClick={() => {
@@ -205,7 +205,7 @@ function LoginContent() {
             className={`flex-1 py-2 rounded-lg transition ${
               mode === "signin"
                 ? "bg-blue-600 text-white font-bold"
-                : "text-neutral-400 hover:text-white"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
             }`}
           >
             Sign In
@@ -219,7 +219,7 @@ function LoginContent() {
             className={`flex-1 py-2 rounded-lg transition ${
               mode === "signup"
                 ? "bg-blue-600 text-white font-bold"
-                : "text-neutral-400 hover:text-white"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
             }`}
           >
             Create Account

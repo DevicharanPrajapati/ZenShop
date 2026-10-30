@@ -176,27 +176,27 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
 
           <Link href={`/products/${product.id}`} className="block group/title mt-1">
-            <h3 className="text-sm font-semibold text-neutral-100 group-hover/title:text-blue-400 transition line-clamp-1">
+            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 group-hover/title:text-blue-600 dark:group-hover/title:text-blue-400 transition line-clamp-1">
               {product.name}
             </h3>
           </Link>
         </div>
 
         {/* Color swatches & Price */}
-        <div className="flex items-center justify-between pt-1 border-t border-neutral-900">
+        <div className="flex items-center justify-between pt-1 border-t border-neutral-200 dark:border-neutral-900">
           <div className="flex items-center space-x-1">
             {product.colors.map((color) => (
               <span
                 key={color.name}
                 title={color.name}
-                className="w-3 h-3 rounded-full border border-neutral-700"
+                className="w-3 h-3 rounded-full border border-neutral-300 dark:border-neutral-700"
                 style={{ backgroundColor: color.hex }}
               />
             ))}
           </div>
 
           <div className="flex items-baseline space-x-1.5">
-            <span className="text-sm font-mono font-bold text-white">
+            <span className="text-sm font-mono font-bold text-neutral-950 dark:text-white">
               ₹{product.price.toLocaleString("en-IN")}
             </span>
             {product.originalPrice > product.price && (

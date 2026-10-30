@@ -49,20 +49,20 @@ export default function CartPage() {
       </div>
 
       <div className="flex items-baseline space-x-3 mb-8">
-        <h1 className="text-2xl sm:text-4xl font-mono font-bold uppercase tracking-tight text-white">
+        <h1 className="text-2xl sm:text-4xl font-mono font-bold uppercase tracking-tight text-neutral-950 dark:text-white">
           YOUR SHOPPING BAG
         </h1>
-        <span className="text-sm font-mono text-neutral-400">
+        <span className="text-sm font-mono text-neutral-600 dark:text-neutral-400">
           ({items.reduce((acc, i) => acc + i.quantity, 0)} Items)
         </span>
       </div>
 
       {items.length === 0 ? (
-        <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-12 text-center max-w-xl mx-auto my-12 space-y-4">
-          <div className="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center mx-auto text-neutral-500">
+        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-12 text-center max-w-xl mx-auto my-12 space-y-4">
+          <div className="w-16 h-16 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 flex items-center justify-center mx-auto text-neutral-500">
             <Truck className="w-8 h-8" />
           </div>
-          <h2 className="text-xl font-mono font-bold text-white uppercase">Your Bag is Empty</h2>
+          <h2 className="text-xl font-mono font-bold text-neutral-950 dark:text-white uppercase">Your Bag is Empty</h2>
           <p className="text-xs text-neutral-400 font-sans max-w-sm mx-auto leading-relaxed">
             Our capsule drops are limited. Grab your size before it is archived.
           </p>
@@ -131,13 +131,13 @@ export default function CartPage() {
                       </span>
                       <Link
                         href={`/products/${item.product.id}`}
-                        className="block text-sm font-semibold text-white hover:text-blue-400 transition"
+                        className="block text-sm font-semibold text-neutral-950 dark:text-white hover:text-blue-500 transition"
                       >
                         {item.product.name}
                       </Link>
 
-                      <div className="flex items-center space-x-2 text-xs font-mono text-neutral-400 pt-1">
-                        <span className="bg-neutral-900 border border-neutral-800 px-2 py-0.5 rounded text-white font-bold">
+                      <div className="flex items-center space-x-2 text-xs font-mono text-neutral-600 dark:text-neutral-400 pt-1">
+                        <span className="bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 px-2 py-0.5 rounded text-neutral-950 dark:text-white font-bold">
                           Size: {item.selectedSize}
                         </span>
                         <span className="flex items-center space-x-1.5">
@@ -193,7 +193,7 @@ export default function CartPage() {
 
                     {/* Subtotal */}
                     <div className="text-right min-w-[90px]">
-                      <p className="text-sm font-mono font-bold text-white">
+                      <p className="text-sm font-mono font-bold text-neutral-950 dark:text-white">
                         ₹{(item.product.price * item.quantity).toLocaleString("en-IN")}
                       </p>
                       {item.quantity > 1 && (
@@ -212,7 +212,7 @@ export default function CartPage() {
                           item.selectedColor.name
                         )
                       }
-                      className="p-2 text-neutral-500 hover:text-red-400 rounded-lg hover:bg-neutral-900 transition"
+                      className="p-2 text-neutral-500 hover:text-red-400 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition"
                       aria-label="Remove item"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -225,8 +225,8 @@ export default function CartPage() {
 
           {/* Summary Column */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 space-y-5">
-              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-white border-b border-neutral-900 pb-3">
+            <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 space-y-5">
+              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-neutral-950 dark:text-white border-b border-neutral-200 dark:border-neutral-900 pb-3">
                 ORDER SUMMARY
               </h2>
 
@@ -319,7 +319,7 @@ export default function CartPage() {
                   </span>
                 </div>
 
-                <div className="flex justify-between text-base font-mono font-bold text-white pt-3 border-t border-neutral-900">
+                <div className="flex justify-between text-base font-mono font-bold text-neutral-950 dark:text-white pt-3 border-t border-neutral-200 dark:border-neutral-900">
                   <span>Total Amount</span>
                   <span>₹{total.toLocaleString("en-IN")}</span>
                 </div>

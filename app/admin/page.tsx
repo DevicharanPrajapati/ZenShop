@@ -239,22 +239,22 @@ export default function AdminPage() {
           <span className="text-xs font-mono uppercase tracking-widest text-neutral-500 font-bold">
             STUDIO CONTROL CENTER
           </span>
-          <h1 className="text-2xl sm:text-3xl font-mono font-black uppercase text-white tracking-tight mt-1">
+          <h1 className="text-2xl sm:text-3xl font-mono font-black uppercase text-neutral-950 dark:text-white tracking-tight mt-1">
             DROP INVENTORY &amp; TELEMETRY
           </h1>
-          <p className="text-xs text-neutral-400 mt-1 font-sans">
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1 font-sans">
             Full-stack administrative management suite for Drop 01 capsules and customer fulfillment.
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex bg-neutral-900 p-1 rounded-xl border border-neutral-800 text-xs font-mono">
+        <div className="flex bg-neutral-100 dark:bg-neutral-900 p-1 rounded-xl border border-neutral-300 dark:border-neutral-800 text-xs font-mono">
           <button
             onClick={() => setActiveTab("inventory")}
             className={`px-4 py-2 rounded-lg transition ${
               activeTab === "inventory"
                 ? "bg-blue-600 text-white font-bold"
-                : "text-neutral-400 hover:text-white"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
             }`}
           >
             Inventory ({productList.length})
@@ -264,7 +264,7 @@ export default function AdminPage() {
             className={`px-4 py-2 rounded-lg transition ${
               activeTab === "orders"
                 ? "bg-blue-600 text-white font-bold"
-                : "text-neutral-400 hover:text-white"
+                : "text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white"
             }`}
           >
             Orders ({orders.length})
@@ -274,33 +274,33 @@ export default function AdminPage() {
 
       {/* Key Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-        <div className="p-5 rounded-2xl border border-neutral-850 bg-neutral-950 space-y-2">
+        <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white dark:bg-neutral-950 space-y-2">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-mono">
             <span>GROSS SALES</span>
             <TrendingUp className="w-4 h-4 text-emerald-400" />
           </div>
-          <p className="text-2xl font-mono font-black text-white">
+          <p className="text-2xl font-mono font-black text-neutral-950 dark:text-white">
             ₹{totalRevenue.toLocaleString("en-IN")}
           </p>
-          <p className="text-[11px] font-mono text-emerald-400">+18.4% vs last drop</p>
+          <p className="text-[11px] font-mono text-emerald-500 dark:text-emerald-400">+18.4% vs last drop</p>
         </div>
 
-        <div className="p-5 rounded-2xl border border-neutral-850 bg-neutral-950 space-y-2">
+        <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white dark:bg-neutral-950 space-y-2">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-mono">
             <span>TOTAL FULFILLED</span>
             <ShoppingBag className="w-4 h-4 text-blue-400" />
           </div>
-          <p className="text-2xl font-mono font-black text-white">{totalOrders}</p>
-          <p className="text-[11px] font-mono text-blue-400">98.2% on-time dispatch</p>
+          <p className="text-2xl font-mono font-black text-neutral-950 dark:text-white">{totalOrders}</p>
+          <p className="text-[11px] font-mono text-blue-500 dark:text-blue-400">98.2% on-time dispatch</p>
         </div>
 
-        <div className="p-5 rounded-2xl border border-neutral-850 bg-neutral-950 space-y-2">
+        <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white dark:bg-neutral-950 space-y-2">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-mono">
             <span>AVG ORDER VALUE</span>
             <Package className="w-4 h-4 text-purple-400" />
           </div>
-          <p className="text-2xl font-mono font-black text-white">₹2,850</p>
-          <p className="text-[11px] font-mono text-neutral-400">2.1 items per bag</p>
+          <p className="text-2xl font-mono font-black text-neutral-950 dark:text-white">₹2,850</p>
+          <p className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400">2.1 items per bag</p>
         </div>
 
         <div className="p-5 rounded-2xl border border-neutral-850 bg-neutral-950 space-y-2">

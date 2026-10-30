@@ -52,20 +52,20 @@ export default function CartDrawer() {
       />
 
       <div className="fixed inset-y-0 right-0 flex max-w-full pl-4 sm:pl-10">
-        <aside className="w-screen max-w-md bg-neutral-950 border-l border-neutral-800 flex flex-col shadow-2xl text-white">
+        <aside className="w-screen max-w-md bg-white dark:bg-neutral-950 border-l border-neutral-200 dark:border-neutral-800 flex flex-col shadow-2xl text-neutral-900 dark:text-white">
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-800">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-200 dark:border-neutral-800">
             <div className="flex items-baseline space-x-2">
-              <h2 className="text-sm font-mono tracking-widest uppercase font-bold">
+              <h2 className="text-sm font-mono tracking-widest uppercase font-bold text-neutral-950 dark:text-white">
                 SHOPPING BAG
               </h2>
-              <span className="text-xs font-mono text-neutral-400">
+              <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
                 ({items.reduce((acc, i) => acc + i.quantity, 0)})
               </span>
             </div>
             <button
               onClick={closeCart}
-              className="p-1.5 text-neutral-400 hover:text-white rounded-lg hover:bg-neutral-900 transition"
+              className="p-1.5 text-neutral-500 hover:text-black dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-900 transition"
               aria-label="Close cart"
             >
               <X className="w-5 h-5" />
@@ -73,27 +73,27 @@ export default function CartDrawer() {
           </div>
 
           {/* Free Shipping Meter */}
-          <div className="bg-neutral-900/90 px-6 py-3.5 border-b border-neutral-800">
+          <div className="bg-neutral-100 dark:bg-neutral-900/90 px-6 py-3.5 border-b border-neutral-200 dark:border-neutral-800">
             <div className="flex items-center justify-between text-xs font-mono">
-              <span className="flex items-center space-x-1.5 text-neutral-300">
-                <Truck className="w-4 h-4 text-blue-400" />
+              <span className="flex items-center space-x-1.5 text-neutral-700 dark:text-neutral-300">
+                <Truck className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                 {amountNeededForFreeShipping === 0 ? (
-                  <span className="text-blue-400 font-semibold flex items-center space-x-1">
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold flex items-center space-x-1">
                     <span>FREE EXPRESS SHIPPING UNLOCKED!</span>
-                    <Sparkles className="w-3.5 h-3.5 inline text-yellow-400" />
+                    <Sparkles className="w-3.5 h-3.5 inline text-yellow-500" />
                   </span>
                 ) : (
                   <span>
-                    Add <strong className="text-white">₹{amountNeededForFreeShipping}</strong> for{" "}
-                    <strong className="text-blue-400">FREE DELIVERY</strong>
+                    Add <strong className="text-neutral-950 dark:text-white">₹{amountNeededForFreeShipping}</strong> for{" "}
+                    <strong className="text-blue-600 dark:text-blue-400">FREE DELIVERY</strong>
                   </span>
                 )}
               </span>
-              <span className="text-[10px] text-neutral-400 font-mono">
+              <span className="text-[10px] text-neutral-500 dark:text-neutral-400 font-mono">
                 {freeShippingProgress}%
               </span>
             </div>
-            <div className="mt-2 h-1.5 w-full bg-neutral-800 rounded-full overflow-hidden">
+            <div className="mt-2 h-1.5 w-full bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-blue-600 to-blue-400 transition-all duration-500 rounded-full"
                 style={{ width: `${freeShippingProgress}%` }}
@@ -282,28 +282,28 @@ export default function CartDrawer() {
               </div>
 
               {/* Subtotal Calculations */}
-              <div className="space-y-1.5 text-xs font-mono border-t border-neutral-900 pt-3">
-                <div className="flex justify-between text-neutral-400">
+              <div className="space-y-1.5 text-xs font-mono border-t border-neutral-200 dark:border-neutral-900 pt-3">
+                <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
                   <span>Subtotal</span>
                   <span>₹{subtotal.toLocaleString("en-IN")}</span>
                 </div>
                 {discount > 0 && (
-                  <div className="flex justify-between text-green-400">
+                  <div className="flex justify-between text-green-600 dark:text-green-400">
                     <span>Discount</span>
                     <span>-₹{discount.toLocaleString("en-IN")}</span>
                   </div>
                 )}
-                <div className="flex justify-between text-neutral-400">
+                <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
                   <span>Shipping</span>
                   <span>
                     {shippingFee === 0 ? (
-                      <span className="text-blue-400 font-semibold">FREE</span>
+                      <span className="text-blue-600 dark:text-blue-400 font-semibold">FREE</span>
                     ) : (
                       `₹${shippingFee}`
                     )}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm font-bold text-white pt-2 border-t border-neutral-900">
+                <div className="flex justify-between text-sm font-bold text-neutral-950 dark:text-white pt-2 border-t border-neutral-200 dark:border-neutral-900">
                   <span>Total Amount</span>
                   <span>₹{total.toLocaleString("en-IN")}</span>
                 </div>

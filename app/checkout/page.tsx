@@ -255,7 +255,7 @@ export default function CheckoutPage() {
         <span className="text-xs font-mono uppercase tracking-widest text-blue-500">
           SECURE ENCRYPTED CHECKOUT
         </span>
-        <h1 className="text-2xl sm:text-3xl font-mono font-black uppercase text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-mono font-black uppercase text-neutral-950 dark:text-white mt-1">
           SHIPPING &amp; PAYMENT SIMULATOR
         </h1>
       </div>
@@ -264,12 +264,12 @@ export default function CheckoutPage() {
         {/* Left Form Column */}
         <div className="lg:col-span-7 space-y-8">
           {/* Section 1: Customer Contact & Indian Shipping Address */}
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8 space-y-6">
-            <div className="flex items-center space-x-3 border-b border-neutral-900 pb-4">
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 sm:p-8 space-y-6">
+            <div className="flex items-center space-x-3 border-b border-neutral-200 dark:border-neutral-900 pb-4">
               <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-mono text-xs font-bold flex items-center justify-center">
                 1
               </div>
-              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-white">
+              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-neutral-950 dark:text-white">
                 Delivery Address (India)
               </h2>
             </div>
