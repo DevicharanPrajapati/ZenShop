@@ -17,6 +17,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useStore } from "@/lib/store";
+import { createOrder } from "@/lib/supabase";
 
 type PaymentMethod = "upi" | "card" | "cod";
 
@@ -91,27 +92,51 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
+  const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsProcessing(true);
 
-    setTimeout(() => {
-      const generatedOrderId = `ZEN-${Math.floor(100000 + Math.random() * 900000)}`;
-      const completedInfo = {
-        orderId: generatedOrderId,
-        date: new Date().toLocaleDateString("en-IN", {
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-        }),
-        totalPaid: total,
-      };
+    const generatedOrderId = `ZEN-${Math.floor(100000 + Math.random() * 900000)}`;
 
-      setOrderComplete(completedInfo);
-      setIsProcessing(false);
-      triggerConfetti();
-      clearCart();
-    }, 1500);
+    // Save order into Supabase
+    await createOrder({
+      id: generatedOrderId,
+      customerName: formData.fullName,
+      customerEmail: formData.email,
+      customerPhone: formData.phone,
+      pincode: formData.pincode,
+      city: formData.city,
+      state: formData.state,
+      address: formData.address,
+      items: items.map((i) => ({
+        id: i.product.id,
+        name: i.product.name,
+        size: i.selectedSize,
+        color: i.selectedColor.name,
+        price: i.product.price,
+        quantity: i.quantity,
+      })),
+      subtotal,
+      discount,
+      shippingFee,
+      total,
+      paymentMethod: paymentMethod.toUpperCase(),
+    });
+
+    const completedInfo = {
+      orderId: generatedOrderId,
+      date: new Date().toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }),
+      totalPaid: total,
+    };
+
+    setOrderComplete(completedInfo);
+    setIsProcessing(false);
+    triggerConfetti();
+    clearCart();
   };
 
   // If order complete screen

@@ -234,9 +234,29 @@ When discussing this project with recruiters, engineering managers, or interview
 
 ---
 
-## 8. Future Roadmap & Extensions
+## 8. Supabase Native Cloud Integration
 
-- [ ] **Prisma & PostgreSQL Database Sync**: Connect the existing `prisma` schema to a hosted Supabase or Neon PostgreSQL instance for multi-admin persistent database storage.
+The platform is integrated with **Supabase** via `@supabase/supabase-js`, completely eliminating heavyweight ORMs like Prisma.
+
+### Database Tables (`supabase_schema.sql`)
+1. **`products`**: Stores garment names, 280-380 GSM fabric weights, categories, sizes, color JSON swatches, stock levels, and multi-angle image URLs.
+2. **`orders`**: Real-time customer orders with shipping addresses, Indian PIN codes, subtotal, discount codes, payment modes (UPI / Card / COD), and delivery statuses.
+3. **`reviews`**: Verified customer reviews with ratings and city origins.
+
+### Setup Instructions
+1. Open your Supabase Dashboard project (**zenshop**).
+2. Go to **SQL Editor** ➔ Click **New query** ➔ Paste the contents of [`supabase_schema.sql`](file:///D:/Projects/E-commerce/zenshop/supabase_schema.sql) ➔ Click **RUN**.
+3. Add your keys to `.env.local`:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-public-key
+   ```
+4. Restart dev server (`bun dev`). Your platform is now connected directly to Supabase cloud!
+
+---
+
+## 9. Future Roadmap & Extensions
+
+- [x] **Native Supabase Client Integration**: Replaced Prisma with `@supabase/supabase-js` client and SQL migration seed.
 - [ ] **Razorpay Live Gateway**: Plug in live Razorpay webhooks for real Indian UPI & card transactions in test mode.
-- [ ] **NextAuth / Auth.js Authentication**: Add Google One-Tap and phone OTP login for persistent customer profiles.
-- [ ] **WhatsApp Business API Notifications**: Simulated or live webhook sending order updates directly to customer WhatsApp numbers.
+- [ ] **Supabase Auth & Storage**: Add Google OAuth and phone OTP login alongside product image uploads directly from `/admin`.

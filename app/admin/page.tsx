@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -16,6 +16,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { products as initialProducts, type Product } from "@/lib/products";
+import { supabase } from "@/lib/supabase";
 
 export default function AdminPage() {
   const [productList, setProductList] = useState<Product[]>(initialProducts);
@@ -65,13 +66,51 @@ export default function AdminPage() {
     },
   ]);
 
+  // Fetch real orders from Supabase if configured
+  useEffect(() => {
+    const client = supabase;
+    if (!client) return;
+    const fetchLiveOrders = async () => {
+      const { data, error } = await client
+        .from("orders")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (!error && data && data.length > 0) {
+        setOrders(
+          data.map((o: any) => ({
+            id: o.id,
+            customer: o.customer_name,
+            city: `${o.city}, ${o.state}`,
+            items: Array.isArray(o.items)
+              ? o.items.map((i: any) => `${i.name} (${i.size}) x ${i.quantity}`).join(", ")
+              : "Garments",
+            amount: Number(o.total),
+            payment: o.payment_method,
+            status: o.status || "Processing",
+            date: new Date(o.created_at).toLocaleDateString("en-IN", {
+              day: "numeric",
+              month: "short",
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+          }))
+        );
+      }
+    };
+    fetchLiveOrders();
+  }, []);
+
   const totalRevenue = orders.reduce((acc, o) => acc + o.amount, 0) + 340000;
   const totalOrders = orders.length + 120;
 
-  const updateOrderStatus = (orderId: string, newStatus: string) => {
+  const updateOrderStatus = async (orderId: string, newStatus: string) => {
     setOrders((prev) =>
       prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
     );
+    if (supabase) {
+      await supabase.from("orders").update({ status: newStatus }).eq("id", orderId);
+    }
   };
 
   const deleteProduct = (productId: string) => {

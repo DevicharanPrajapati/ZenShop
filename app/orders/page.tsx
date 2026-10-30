@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Search, CheckCircle2, Truck, Package, Clock, ArrowLeft, ShieldCheck } from "lucide-react";
+import { getOrderById } from "@/lib/supabase";
 
 export default function OrdersPage() {
   const [trackingId, setTrackingId] = useState("ZEN-849201");
@@ -48,14 +49,27 @@ export default function OrdersPage() {
     ],
   });
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!trackingId.trim()) return;
-    // Updates simulated order status
-    setActiveOrder((prev) => ({
-      ...prev,
-      id: trackingId.toUpperCase(),
-    }));
+    const queryId = trackingId.trim().toUpperCase();
+    if (!queryId) return;
+
+    // Check if order exists in Supabase
+    const dbOrder = await getOrderById(queryId);
+    if (dbOrder) {
+      setActiveOrder((prev) => ({
+        ...prev,
+        id: dbOrder.id,
+        status: dbOrder.status || "Processing",
+        courier: dbOrder.courier || "Bluedart Express Air",
+        destination: `${dbOrder.city}, ${dbOrder.state}`,
+      }));
+    } else {
+      setActiveOrder((prev) => ({
+        ...prev,
+        id: queryId,
+      }));
+    }
   };
 
   return (
