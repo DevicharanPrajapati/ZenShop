@@ -1,19 +1,57 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { products as mockProducts, type Product } from "./products";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+function normalizeSupabaseUrl(rawUrl?: string): string {
+  if (!rawUrl) return "";
+  let url = rawUrl.trim();
+  if (!url) return "";
 
-export const isSupabaseConfigured = Boolean(
-  supabaseUrl &&
-    supabaseAnonKey &&
-    supabaseUrl !== "https://your-project.supabase.co" &&
-    !supabaseUrl.includes("placeholder")
-);
+  // Prepend https:// if protocol is missing
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = `https://${url}`;
+  }
 
-export const supabase = isSupabaseConfigured
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null;
+  // Strip /rest/v1 or trailing slash if user copied the REST endpoint
+  url = url.replace(/\/rest\/v1\/?$/, "");
+  url = url.replace(/\/+$/, "");
+
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+      return url;
+    }
+  } catch {
+    // Invalid URL
+  }
+  return "";
+}
+
+const rawUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const rawKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+
+const supabaseUrl = normalizeSupabaseUrl(rawUrl);
+const supabaseAnonKey = rawKey.trim();
+
+function initSupabase(): SupabaseClient | null {
+  if (!supabaseUrl || !supabaseAnonKey) return null;
+  if (supabaseUrl.includes("your-project") || supabaseUrl.includes("placeholder")) {
+    return null;
+  }
+
+  try {
+    return createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        persistSession: false,
+      },
+    });
+  } catch (err) {
+    console.warn("Could not initialize Supabase client:", err);
+    return null;
+  }
+}
+
+export const supabase: SupabaseClient | null = initSupabase();
+export const isSupabaseConfigured = Boolean(supabase !== null);
 
 // ==========================================
 // SUPABASE DATABASE DATA HELPERS
@@ -31,7 +69,6 @@ export async function getProducts(): Promise<Product[]> {
       .order("created_at", { ascending: false });
 
     if (error || !data || data.length === 0) {
-      console.warn("Supabase fetch returned empty, using fallback items:", error?.message);
       return mockProducts;
     }
 
