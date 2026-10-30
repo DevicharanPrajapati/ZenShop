@@ -78,7 +78,14 @@ bun run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) with your browser.
 
-### 3. Build for Production
+### 3. Demo Credentials (RBAC)
+
+| Account Type | Email | Password | Role | Permissions |
+|---|---|---|---|---|
+| **Admin (`byteAdmin`)** | `byteadmin@zenstudio.in` | `Password@123` | `admin` | Full `/admin` dashboard, inventory telemetry, order dispatch manager |
+| **User (Customer)** | `patron@zenstudio.in` | `Password@123` | `user` | Shopping bag, checkout simulator, order tracking, `/admin` blocked with 403 |
+
+### 4. Build for Production
 ```bash
 bun run build
 ```

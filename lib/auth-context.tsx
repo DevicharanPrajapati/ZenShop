@@ -39,7 +39,13 @@ export const determineRole = (email?: string, metaRole?: string): UserRole => {
   const normalized = email.toLowerCase().trim();
   const configuredAdmin = process.env.NEXT_PUBLIC_ADMIN_EMAIL?.toLowerCase()?.trim() || "admin@zenstudio.in";
   if (configuredAdmin && normalized === configuredAdmin) return "admin";
-  if (normalized.startsWith("admin@")) return "admin";
+  if (
+    normalized.startsWith("admin@") ||
+    normalized.startsWith("byteadmin@") ||
+    normalized.includes("byteadmin")
+  ) {
+    return "admin";
+  }
   return "user";
 };
 

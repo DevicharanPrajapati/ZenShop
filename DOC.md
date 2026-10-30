@@ -77,6 +77,12 @@ zenshop/
 │   ├── products.ts               # Product types, rich catalog of streetwear garments & accessories
 │   └── store.tsx                 # Global React Context + LocalStorage persistence for Cart, Wishlist, and Coupons
 │
+├── supabase/
+│   ├── 01_schema.sql             # Products, orders, and verified reviews DDL
+│   ├── 02_rls.sql                # Row-Level Security policies for public and authenticated access
+│   ├── 03_seed.sql               # Curated Indian contemporary streetwear drop data & customer reviews
+│   └── 04_seed_users.sql          # Seed authentication accounts (byteAdmin and standard user)
+│
 ├── public/                       # Static SVGs and assets
 ├── next.config.ts                # Next.js 16 configuration, Unsplash remote image patterns, Turbopack rules
 ├── package.json                  # Dependencies: Next.js 16, React 19, Tailwind v4, Lucide React, Canvas Confetti
@@ -151,6 +157,13 @@ zenshop/
   * **Metric Counters**: Gross Revenue (`₹3,48,250+`), Total Orders, Average Order Value (`₹2,850`), and Low Stock Alerts.
   * **Inventory Table**: Live view of all styles, categories, prices, fabric weights, and stock levels broken down by size (`S:5`, `M:2`, `L:8`, etc.).
   * **Order Fulfillment Pipeline**: Customer orders with a live status dropdown to transition packages from *Processing* ➔ *Dispatched* ➔ *Delivered*.
+
+#### Seed Credentials for Testing & Demonstration
+
+| Role | Account Name | Email | Password | Access Rights |
+|---|---|---|---|---|
+| **`admin`** | **byteAdmin** | `byteadmin@zenstudio.in` | `Password@123` | Unrestricted access to `/admin`, stock manager, and order status pipeline. |
+| **`user`** | **Rahul Sharma** | `patron@zenstudio.in` | `Password@123` | Storefront, cart, simulated checkout, order tracking; `/admin` returns 403 Forbidden. |
 
 ---
 
