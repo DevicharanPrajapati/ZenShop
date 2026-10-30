@@ -36,22 +36,31 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-neutral-950/85 border-b border-neutral-800 transition-colors">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-18">
         {/* Left: Mobile Menu Toggle & Brand */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-3 sm:space-x-4">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-neutral-300 hover:text-white p-2 rounded-lg transition"
+            className="md:hidden text-neutral-800 hover:text-black dark:text-neutral-300 dark:hover:text-white p-2 rounded-lg transition"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
-          <Link href="/" className="group flex items-baseline space-x-2">
-            <span className="text-xl sm:text-2xl font-black tracking-tighter text-white font-mono uppercase group-hover:text-neutral-200 transition">
-              ZEN<span className="text-blue-500">/</span>STUDIO
-            </span>
-            <span className="hidden sm:inline-block text-[9px] uppercase tracking-widest font-mono text-neutral-400 border border-neutral-800 px-1.5 py-0.5 rounded">
-              IND
-            </span>
+          <Link href="/" className="group flex items-center space-x-2.5">
+            {/* Architectural Monogram Logo Mark */}
+            <div className="w-8 h-8 rounded-xl bg-neutral-900 dark:bg-neutral-900 border border-neutral-700/80 dark:border-neutral-700 flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 group-hover:border-blue-500 transition-all">
+              <span className="font-mono font-black text-xs text-white">Z</span>
+              <span className="text-blue-500 font-bold text-xs">/</span>
+              <span className="font-mono font-black text-xs text-white">S</span>
+            </div>
+
+            <div className="flex items-baseline space-x-2">
+              <span className="text-xl sm:text-2xl font-black tracking-tighter text-neutral-950 dark:text-white font-mono uppercase group-hover:opacity-85 transition">
+                ZEN<span className="text-blue-500">/</span>STUDIO
+              </span>
+              <span className="hidden sm:inline-block text-[9px] uppercase tracking-widest font-mono text-neutral-600 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 px-1.5 py-0.5 rounded">
+                IND
+              </span>
+            </div>
           </Link>
         </div>
 
@@ -65,8 +74,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`text-xs font-mono tracking-widest uppercase transition-colors relative py-1 ${
                   isActive
-                    ? "text-blue-400 font-semibold"
-                    : "text-neutral-300 hover:text-white"
+                    ? "text-blue-600 dark:text-blue-400 font-bold"
+                    : "text-neutral-700 hover:text-black dark:text-neutral-300 dark:hover:text-white"
                 }`}
               >
                 {link.name}
@@ -79,11 +88,11 @@ export default function Navbar() {
         </nav>
 
         {/* Right: Actions */}
-        <div className="flex items-center space-x-2 sm:space-x-4">
+        <div className="flex items-center space-x-1.5 sm:space-x-3">
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition"
+            className="p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             aria-label="Search garments"
           >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -92,7 +101,7 @@ export default function Navbar() {
           {/* Theme Toggle (Dark / Light) */}
           <button
             onClick={toggleTheme}
-            className="p-2 text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition"
+            className="p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
             aria-label="Toggle theme"
           >
@@ -106,12 +115,12 @@ export default function Navbar() {
           {/* Wishlist */}
           <Link
             href="/wishlist"
-            className="relative p-2 text-neutral-300 hover:text-white hover:bg-neutral-900 rounded-lg transition"
+            className="relative p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             aria-label="Wishlist"
           >
             <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
             {wishlist.length > 0 && (
-              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-neutral-200 text-[10px] font-bold text-neutral-950">
+              <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white">
                 {wishlist.length}
               </span>
             )}
@@ -122,8 +131,8 @@ export default function Navbar() {
             href="/login"
             className={`flex items-center space-x-1.5 rounded-lg transition ${
               user
-                ? "bg-blue-950/60 border border-blue-800 text-blue-300 px-2.5 py-1.5 text-xs font-mono"
-                : "p-2 text-neutral-300 hover:text-white hover:bg-neutral-900"
+                ? "bg-blue-100 text-blue-800 border border-blue-300 dark:bg-blue-950/60 dark:border-blue-800 dark:text-blue-300 px-2.5 py-1.5 text-xs font-mono"
+                : "p-2 text-neutral-700 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900"
             }`}
             title={user ? `Signed in as ${user.email}` : "Sign in to Studio"}
             aria-label="Account Login"
@@ -139,11 +148,11 @@ export default function Navbar() {
           {/* Cart Bag Trigger */}
           <button
             onClick={openCart}
-            className="relative flex items-center space-x-2 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/60 px-3 py-2 rounded-lg text-white transition group"
+            className="relative flex items-center space-x-2 bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 dark:bg-neutral-900 dark:hover:bg-neutral-800 dark:border-neutral-700/60 px-3 py-2 rounded-lg text-neutral-900 dark:text-white transition group"
             aria-label="Open shopping bag"
           >
             <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform" />
-            <span className="text-xs font-mono tracking-wider font-semibold">BAG</span>
+            <span className="text-xs font-mono tracking-wider font-semibold text-neutral-900 dark:text-white">BAG</span>
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[11px] font-bold text-white">
               {cartCount}
             </span>

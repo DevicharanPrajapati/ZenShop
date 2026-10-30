@@ -70,8 +70,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-4">
-            <Link href="/" className="inline-block">
-              <span className="text-xl font-black font-mono tracking-tighter text-white uppercase">
+            <Link href="/" className="inline-flex items-center space-x-2.5 group">
+              <div className="w-8 h-8 rounded-xl bg-neutral-900 dark:bg-neutral-900 border border-neutral-700/80 dark:border-neutral-700 flex items-center justify-center shadow-sm shrink-0 group-hover:scale-105 group-hover:border-blue-500 transition-all">
+                <span className="font-mono font-black text-xs text-white">Z</span>
+                <span className="text-blue-500 font-bold text-xs">/</span>
+                <span className="font-mono font-black text-xs text-white">S</span>
+              </div>
+              <span className="text-xl font-black font-mono tracking-tighter text-neutral-950 dark:text-white uppercase">
                 ZEN<span className="text-blue-500">/</span>STUDIO
               </span>
             </Link>
