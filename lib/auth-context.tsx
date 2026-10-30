@@ -16,7 +16,11 @@ interface AuthContextType {
   isLoading: boolean;
   isConfigured: boolean;
   signInWithEmail: (email: string, password: string) => Promise<{ error: string | null }>;
-  signUpWithEmail: (email: string, password: string, fullName: string) => Promise<{ error: string | null }>;
+  signUpWithEmail: (
+    email: string,
+    password: string,
+    fullName: string
+  ) => Promise<{ error: string | null; needsEmailConfirmation?: boolean }>;
   signInWithGithub: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 }
@@ -96,11 +100,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
+        email: email.trim(),
         password,
       });
 
       if (error) {
+        if (error.message.toLowerCase().includes("email not confirmed")) {
+          return {
+            error:
+              "Email confirmation required. Please check your inbox or turn off 'Confirm email' in Supabase Dashboard (Authentication -> Providers -> Email).",
+          };
+        }
+        if (error.message.toLowerCase().includes("invalid login credentials")) {
+          return { error: "Invalid email or password. Please verify or create an account." };
+        }
         return { error: error.message };
       }
 
@@ -129,16 +142,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       try {
         localStorage.setItem("zen_demo_user", JSON.stringify(demo));
       } catch {}
-      return { error: null };
+      return { error: null, needsEmailConfirmation: false };
     }
 
     try {
       const { data, error } = await supabase.auth.signUp({
-        email,
+        email: email.trim(),
         password,
         options: {
           data: {
-            full_name: fullName,
+            full_name: fullName.trim(),
           },
         },
       });
@@ -147,15 +160,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { error: error.message };
       }
 
-      if (data.user) {
+      // Check if email already existed in Supabase
+      if (data.user && data.user.identities && data.user.identities.length === 0) {
+        return {
+          error: "An account with this email already exists. Please switch to Sign In.",
+        };
+      }
+
+      const hasSession = Boolean(data.session);
+
+      if (data.user && hasSession) {
         setUser({
           id: data.user.id,
           email: data.user.email || "",
-          fullName,
+          fullName: fullName.trim(),
         });
       }
 
-      return { error: null };
+      return { error: null, needsEmailConfirmation: !hasSession };
     } catch (err: any) {
       return { error: err.message || "An unexpected sign-up error occurred." };
     }

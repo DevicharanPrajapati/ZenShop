@@ -59,8 +59,13 @@ function LoginContent() {
       if (res.error) {
         setErrorMsg(res.error);
         setIsSubmitting(false);
+      } else if (res.needsEmailConfirmation) {
+        setSuccessMsg(
+          "Studio account created! An activation link has been sent to your email. Check your inbox to verify."
+        );
+        setIsSubmitting(false);
       } else {
-        setSuccessMsg("Studio account registered successfully!");
+        setSuccessMsg("Studio account registered successfully! Redirecting...");
         setTimeout(() => {
           router.push(redirectPath);
         }, 1000);
