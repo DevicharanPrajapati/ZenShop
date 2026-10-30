@@ -105,6 +105,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (error) {
+        if (
+          error.status === 429 ||
+          error.message.toLowerCase().includes("rate limit") ||
+          error.message.toLowerCase().includes("too many requests")
+        ) {
+          return {
+            error:
+              "Too many attempts. Supabase has an email rate limit. To fix this instantly: Open Supabase Dashboard -> Authentication -> Providers -> Email -> Turn OFF 'Confirm email'.",
+          };
+        }
         if (error.message.toLowerCase().includes("email not confirmed")) {
           return {
             error:
@@ -157,6 +167,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (error) {
+        if (
+          error.status === 429 ||
+          error.message.toLowerCase().includes("rate limit") ||
+          error.message.toLowerCase().includes("too many requests")
+        ) {
+          return {
+            error:
+              "Email rate limit exceeded! To fix this instantly: in your Supabase Dashboard -> Authentication -> Providers -> Email -> Turn OFF 'Confirm email'.",
+          };
+        }
         return { error: error.message };
       }
 
