@@ -232,10 +232,10 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
                     onClick={() => setSelectedSize(size)}
                     className={`py-3 rounded-xl font-mono text-xs font-bold transition flex flex-col items-center justify-center border ${
                       isSoldOut
-                        ? "bg-neutral-900/50 text-neutral-600 border-neutral-900 cursor-not-allowed line-through"
+                        ? "bg-neutral-100 dark:bg-neutral-900/50 text-neutral-400 dark:text-neutral-600 border-neutral-200 dark:border-neutral-900 cursor-not-allowed line-through"
                         : selectedSize === size
-                        ? "bg-white text-black border-white shadow-lg"
-                        : "bg-neutral-900 text-neutral-200 border-neutral-800 hover:border-neutral-700 hover:text-white"
+                        ? "bg-neutral-950 text-white dark:bg-white dark:text-black border-neutral-950 dark:border-white shadow-md"
+                        : "bg-neutral-100 text-neutral-900 border-neutral-200 dark:bg-neutral-900 dark:text-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-700 hover:text-black dark:hover:text-white"
                     }`}
                   >
                     <span>{size}</span>
@@ -283,30 +283,30 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
           </div>
 
           {/* Value Props Strip */}
-          <div className="rounded-xl border border-neutral-850 bg-neutral-900/40 p-4 space-y-2.5 text-xs font-mono text-neutral-400">
+          <div className="rounded-xl border border-neutral-200 dark:border-neutral-850 bg-neutral-100/60 dark:bg-neutral-900/40 p-4 space-y-2.5 text-xs font-mono text-neutral-600 dark:text-neutral-400">
             <div className="flex items-center space-x-2.5">
-              <Truck className="w-4 h-4 text-blue-400 shrink-0" />
+              <Truck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
               <span>Complimentary Pan-India Express shipping on ₹1,999+</span>
             </div>
             <div className="flex items-center space-x-2.5">
-              <RotateCcw className="w-4 h-4 text-blue-400 shrink-0" />
+              <RotateCcw className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
               <span>7-Day doorstep size exchange &amp; easy return window</span>
             </div>
             <div className="flex items-center space-x-2.5">
-              <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
               <span>Milled in Tiruppur • 100% genuine heavyweight cotton</span>
             </div>
           </div>
 
           {/* Accordion Tabs */}
-          <div className="border-t border-neutral-800 divide-y divide-neutral-850 text-xs font-mono">
+          <div className="border-t border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-850 text-xs font-mono">
             {/* Fabric & Specs */}
             <div>
               <button
                 onClick={() =>
                   setActiveAccordion(activeAccordion === "fabric" ? null : "fabric")
                 }
-                className="w-full py-4 flex items-center justify-between text-white uppercase font-bold hover:text-blue-400 transition"
+                className="w-full py-4 flex items-center justify-between text-neutral-900 dark:text-white uppercase font-bold hover:text-blue-600 dark:hover:text-blue-400 transition"
               >
                 <span>Fabric Specifications &amp; Features</span>
                 <ChevronDown
@@ -316,9 +316,9 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
                 />
               </button>
               {activeAccordion === "fabric" && (
-                <div className="pb-4 space-y-2 text-neutral-400 font-sans leading-relaxed">
+                <div className="pb-4 space-y-2 text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
                   <p>{product.description}</p>
-                  <ul className="list-disc list-inside space-y-1 pt-2 font-mono text-[11px] text-neutral-300">
+                  <ul className="list-disc list-inside space-y-1 pt-2 font-mono text-[11px] text-neutral-700 dark:text-neutral-300">
                     {product.features.map((feat, i) => (
                       <li key={i}>{feat}</li>
                     ))}
@@ -331,7 +331,7 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
             <div>
               <button
                 onClick={() => setActiveAccordion(activeAccordion === "care" ? null : "care")}
-                className="w-full py-4 flex items-center justify-between text-white uppercase font-bold hover:text-blue-400 transition"
+                className="w-full py-4 flex items-center justify-between text-neutral-900 dark:text-white uppercase font-bold hover:text-blue-600 dark:hover:text-blue-400 transition"
               >
                 <span>Wash &amp; Garment Care</span>
                 <ChevronDown
@@ -341,7 +341,7 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
                 />
               </button>
               {activeAccordion === "care" && (
-                <div className="pb-4 space-y-1.5 text-neutral-400 text-[11px]">
+                <div className="pb-4 space-y-1.5 text-neutral-600 dark:text-neutral-400 text-[11px]">
                   <p>• Machine wash cold inside out with like colors.</p>
                   <p>• Use mild detergent; do not bleach or tumble dry.</p>
                   <p>• Flat air dry in shade to maintain heavy cotton drape.</p>
@@ -469,12 +469,12 @@ export default function ProductDetailsClient({ product, relatedProducts }: Props
       />
 
       {/* Mobile Sticky Quick Add Bar */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-neutral-950/95 backdrop-blur-md border-t border-neutral-800 flex items-center justify-between gap-3 shadow-2xl">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-30 p-3 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-3 shadow-2xl">
         <div>
-          <span className="text-[10px] font-mono text-neutral-400 block uppercase">
+          <span className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 block uppercase">
             Size: {selectedSize}
           </span>
-          <span className="text-sm font-mono font-bold text-white">
+          <span className="text-sm font-mono font-bold text-neutral-900 dark:text-white">
             ₹{product.price.toLocaleString("en-IN")}
           </span>
         </div>

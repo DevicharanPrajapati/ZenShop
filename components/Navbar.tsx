@@ -44,13 +44,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/95 dark:bg-neutral-950/90 border-b border-neutral-200 dark:border-neutral-800 transition-colors">
+    <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-white/95 dark:bg-neutral-950/90 border-b border-neutral-200 dark:border-neutral-800">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-18">
         {/* Left: Mobile Menu Toggle & Brand */}
         <div className="flex items-center space-x-3 sm:space-x-4">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-neutral-800 hover:text-black dark:text-neutral-300 dark:hover:text-white p-2 rounded-lg transition"
+            className="md:hidden text-neutral-900 hover:text-black dark:text-neutral-300 dark:hover:text-white p-2 rounded-lg transition"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -83,10 +83,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-xs font-mono tracking-widest uppercase transition-colors relative py-1 ${
+                className={`text-xs font-mono tracking-widest uppercase transition-colors relative py-1 font-medium ${
                   isActive
                     ? "text-blue-600 dark:text-blue-400 font-bold"
-                    : "text-neutral-800 hover:text-black dark:text-neutral-300 dark:hover:text-white"
+                    : "text-neutral-900 hover:text-black dark:text-neutral-300 dark:hover:text-white"
                 }`}
               >
                 {link.name}
@@ -103,7 +103,7 @@ export default function Navbar() {
           {/* Search Trigger */}
           <button
             onClick={() => setSearchOpen(!searchOpen)}
-            className="p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
+            className="p-2 text-neutral-900 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             aria-label="Search garments"
           >
             <Search className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -112,7 +112,7 @@ export default function Navbar() {
           {/* Theme Toggle (Dark / Light) */}
           <button
             onClick={toggleTheme}
-            className="p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
+            className="p-2 text-neutral-900 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             title={`Switch to ${isDark ? "Light" : "Dark"} Mode`}
             aria-label="Toggle theme"
           >
@@ -126,7 +126,7 @@ export default function Navbar() {
           {/* Wishlist */}
           <Link
             href="/wishlist"
-            className="relative p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
+            className="relative p-2 text-neutral-900 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900 rounded-lg transition"
             aria-label="Wishlist"
           >
             <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -143,7 +143,7 @@ export default function Navbar() {
             className={`flex items-center space-x-1.5 rounded-lg transition ${
               user
                 ? "bg-blue-100 text-blue-800 border border-blue-300 dark:bg-blue-950/60 dark:border-blue-800 dark:text-blue-300 px-2.5 py-1.5 text-xs font-mono"
-                : "p-2 text-neutral-800 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900"
+                : "p-2 text-neutral-900 hover:text-black hover:bg-neutral-100 dark:text-neutral-300 dark:hover:text-white dark:hover:bg-neutral-900"
             }`}
             title={user ? `Signed in as ${user.email}` : "Sign in to Studio"}
             aria-label="Account Login"

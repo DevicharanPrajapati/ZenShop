@@ -30,18 +30,6 @@ html.light, body.light, [data-theme="light"] {
   --accent-blue: #2563eb;
   --border-muted: rgba(0, 0, 0, 0.08);
 
-  --color-neutral-950: #ffffff;
-  --color-neutral-900: #f4f4f6;
-  --color-neutral-850: #ebebef;
-  --color-neutral-800: #e5e5ea;
-  --color-neutral-700: #d1d1d6;
-  --color-neutral-600: #8e8e93;
-  --color-neutral-500: #71717a;
-  --color-neutral-400: #52525b;
-  --color-neutral-300: #27272a;
-  --color-neutral-200: #18181b;
-  --color-neutral-100: #09090b;
-  --color-neutral-50: #000000;
   --scrollbar-track: #f4f4f6;
   --scrollbar-thumb: #d1d1d6;
 }
@@ -82,16 +70,22 @@ body.light .hover\:text-white:hover,
 }
 
 /* 3. Neutral text hierarchy mapped to WCAG AAA contrast */
-html.light .text-neutral-100, body.light .text-neutral-100, [data-theme="light"] .text-neutral-100 { color: #09090b !important; }
-html.light .text-neutral-200, body.light .text-neutral-200, [data-theme="light"] .text-neutral-200 { color: #18181b !important; }
-html.light .text-neutral-300, body.light .text-neutral-300, [data-theme="light"] .text-neutral-300 { color: #27272a !important; }
+html.light .text-neutral-900, body.light .text-neutral-900, [data-theme="light"] .text-neutral-900 { color: #09090b !important; }
+html.light .text-neutral-800, body.light .text-neutral-800, [data-theme="light"] .text-neutral-800 { color: #18181b !important; }
+html.light .text-neutral-700, body.light .text-neutral-700, [data-theme="light"] .text-neutral-700 { color: #27272a !important; }
+html.light .text-neutral-600, body.light .text-neutral-600, [data-theme="light"] .text-neutral-600 { color: #3f3f46 !important; }
+html.light .text-neutral-500, body.light .text-neutral-500, [data-theme="light"] .text-neutral-500 { color: #52525b !important; }
 html.light .text-neutral-400, body.light .text-neutral-400, [data-theme="light"] .text-neutral-400 { color: #52525b !important; }
-html.light .text-neutral-500, body.light .text-neutral-500, [data-theme="light"] .text-neutral-500 { color: #71717a !important; }
+html.light .text-neutral-300, body.light .text-neutral-300, [data-theme="light"] .text-neutral-300 { color: #27272a !important; }
+html.light .text-neutral-200, body.light .text-neutral-200, [data-theme="light"] .text-neutral-200 { color: #18181b !important; }
+html.light .text-neutral-100, body.light .text-neutral-100, [data-theme="light"] .text-neutral-100 { color: #09090b !important; }
 
 /* 4. Text hover transitions */
-html.light .hover\:text-neutral-200:hover, body.light .hover\:text-neutral-200:hover, [data-theme="light"] .hover\:text-neutral-200:hover { color: #09090b !important; }
-html.light .hover\:text-neutral-300:hover, body.light .hover\:text-neutral-300:hover, [data-theme="light"] .hover\:text-neutral-300:hover { color: #09090b !important; }
-html.light .hover\:text-neutral-400:hover, body.light .hover\:text-neutral-400:hover, [data-theme="light"] .hover\:text-neutral-400:hover { color: #18181b !important; }
+html.light .hover\:text-neutral-200:hover, body.light .hover\:text-neutral-200:hover, [data-theme="light"] .hover\:text-neutral-200:hover { color: #000000 !important; }
+html.light .hover\:text-neutral-300:hover, body.light .hover\:text-neutral-300:hover, [data-theme="light"] .hover\:text-neutral-300:hover { color: #000000 !important; }
+html.light .hover\:text-neutral-400:hover, body.light .hover\:text-neutral-400:hover, [data-theme="light"] .hover\:text-neutral-400:hover { color: #09090b !important; }
+html.light .hover\:text-neutral-800:hover, body.light .hover\:text-neutral-800:hover, [data-theme="light"] .hover\:text-neutral-800:hover { color: #000000 !important; }
+html.light .hover\:text-neutral-900:hover, body.light .hover\:text-neutral-900:hover, [data-theme="light"] .hover\:text-neutral-900:hover { color: #000000 !important; }
 
 /* 5. Headings, labels, table headers */
 html.light h1, body.light h1, [data-theme="light"] h1,
@@ -132,6 +126,8 @@ body.light [data-keep-white="true"], body.light [data-keep-white="true"] *,
 /* 7. Card containers and backgrounds in light mode */
 html.light .bg-neutral-950, body.light .bg-neutral-950, [data-theme="light"] .bg-neutral-950 { background-color: #ffffff !important; }
 html.light .bg-neutral-900, body.light .bg-neutral-900, [data-theme="light"] .bg-neutral-900 { background-color: #f4f4f6 !important; }
+html.light .bg-neutral-100, body.light .bg-neutral-100, [data-theme="light"] .bg-neutral-100 { background-color: #f4f4f6 !important; }
+html.light .bg-neutral-50, body.light .bg-neutral-50, [data-theme="light"] .bg-neutral-50 { background-color: #fafaf9 !important; }
 html.light .bg-neutral-900\/60, [data-theme="light"] .bg-neutral-900\/60 { background-color: rgba(244, 244, 246, 0.6) !important; }
 html.light .bg-neutral-900\/80, [data-theme="light"] .bg-neutral-900\/80 { background-color: rgba(244, 244, 246, 0.8) !important; }
 html.light .bg-neutral-900\/90, [data-theme="light"] .bg-neutral-900\/90 { background-color: rgba(244, 244, 246, 0.9) !important; }
@@ -162,6 +158,14 @@ html.light textarea, [data-theme="light"] textarea {
 html.light input::placeholder, [data-theme="light"] input::placeholder,
 html.light textarea::placeholder, [data-theme="light"] textarea::placeholder {
   color: #71717a !important;
+}
+
+/* 11. Marquee Banner contrast */
+html.light .animate-marquee, body.light .animate-marquee, [data-theme="light"] .animate-marquee {
+  color: #09090b !important;
+}
+html.light .animate-marquee span, body.light .animate-marquee span, [data-theme="light"] .animate-marquee span {
+  color: #09090b !important;
 }
 
 /* Custom marquee keyframes */

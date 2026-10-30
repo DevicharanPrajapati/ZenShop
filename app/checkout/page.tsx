@@ -361,12 +361,12 @@ export default function CheckoutPage() {
           </div>
 
           {/* Section 2: Payment Simulator */}
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 sm:p-8 space-y-6">
-            <div className="flex items-center space-x-3 border-b border-neutral-900 pb-4">
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 sm:p-8 space-y-6 shadow-sm dark:shadow-none">
+            <div className="flex items-center space-x-3 border-b border-neutral-200 dark:border-neutral-900 pb-4">
               <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-mono text-xs font-bold flex items-center justify-center">
                 2
               </div>
-              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-white">
+              <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-neutral-950 dark:text-white">
                 Payment Method (Simulated)
               </h2>
             </div>
@@ -378,11 +378,11 @@ export default function CheckoutPage() {
                 onClick={() => setPaymentMethod("upi")}
                 className={`p-3.5 rounded-xl border flex flex-col items-center space-y-2 transition ${
                   paymentMethod === "upi"
-                    ? "bg-blue-950/40 border-blue-500 text-white"
-                    : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white"
+                    ? "bg-blue-50 text-blue-900 border-blue-500 dark:bg-blue-950/40 dark:border-blue-500 dark:text-white"
+                    : "bg-neutral-50 border-neutral-300 text-neutral-700 hover:text-black dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:hover:text-white"
                 }`}
               >
-                <QrCode className="w-5 h-5 text-blue-400" />
+                <QrCode className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <span className="text-xs font-mono font-bold">UPI / QR</span>
               </button>
 
@@ -391,11 +391,11 @@ export default function CheckoutPage() {
                 onClick={() => setPaymentMethod("card")}
                 className={`p-3.5 rounded-xl border flex flex-col items-center space-y-2 transition ${
                   paymentMethod === "card"
-                    ? "bg-blue-950/40 border-blue-500 text-white"
-                    : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white"
+                    ? "bg-blue-50 text-blue-900 border-blue-500 dark:bg-blue-950/40 dark:border-blue-500 dark:text-white"
+                    : "bg-neutral-50 border-neutral-300 text-neutral-700 hover:text-black dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:hover:text-white"
                 }`}
               >
-                <CreditCard className="w-5 h-5 text-blue-400" />
+                <CreditCard className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <span className="text-xs font-mono font-bold">Cards</span>
               </button>
 
@@ -404,47 +404,47 @@ export default function CheckoutPage() {
                 onClick={() => setPaymentMethod("cod")}
                 className={`p-3.5 rounded-xl border flex flex-col items-center space-y-2 transition ${
                   paymentMethod === "cod"
-                    ? "bg-blue-950/40 border-blue-500 text-white"
-                    : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white"
+                    ? "bg-blue-50 text-blue-900 border-blue-500 dark:bg-blue-950/40 dark:border-blue-500 dark:text-white"
+                    : "bg-neutral-50 border-neutral-300 text-neutral-700 hover:text-black dark:bg-neutral-900 dark:border-neutral-800 dark:text-neutral-400 dark:hover:text-white"
                 }`}
               >
-                <Banknote className="w-5 h-5 text-blue-400" />
+                <Banknote className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 <span className="text-xs font-mono font-bold">Cash on Delivery</span>
               </button>
             </div>
 
             {/* Active Payment Method UI */}
             {paymentMethod === "upi" && (
-              <div className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5 space-y-4">
+              <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-xs font-mono font-bold text-white uppercase">
+                    <h3 className="text-xs font-mono font-bold text-neutral-950 dark:text-white uppercase">
                       Instant UPI Payment
                     </h3>
-                    <p className="text-[11px] text-neutral-400">
+                    <p className="text-[11px] text-neutral-600 dark:text-neutral-400">
                       GPay, PhonePe, Paytm, or BHIM UPI
                     </p>
                   </div>
-                  <span className="text-[10px] font-mono text-emerald-400 border border-emerald-500/40 px-2 py-0.5 rounded">
+                  <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/40 bg-emerald-50 dark:bg-transparent px-2 py-0.5 rounded">
                     0% Convenience Fee
                   </span>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4 bg-neutral-950 p-4 rounded-xl border border-neutral-800">
-                  <div className="w-28 h-28 bg-white p-2 rounded-lg flex items-center justify-center shrink-0">
+                <div className="flex flex-col sm:flex-row items-center gap-4 bg-white dark:bg-neutral-950 p-4 rounded-xl border border-neutral-200 dark:border-neutral-800">
+                  <div className="w-28 h-28 bg-white p-2 rounded-lg flex items-center justify-center shrink-0 border border-neutral-300">
                     {/* Simulated SVG QR code */}
                     <div className="w-full h-full border-4 border-black border-dashed flex items-center justify-center text-[10px] font-mono text-black font-bold text-center">
                       ZEN-UPI QR
                     </div>
                   </div>
                   <div className="space-y-2 text-xs font-mono w-full">
-                    <label className="text-neutral-400">Or enter your UPI VPA</label>
+                    <label className="text-neutral-700 dark:text-neutral-400 font-medium">Or enter your UPI VPA</label>
                     <input
                       type="text"
                       value={upiId}
                       onChange={(e) => setUpiId(e.target.value)}
                       placeholder="username@okhdfcbank"
-                      className="w-full bg-neutral-900 border border-neutral-700 rounded-lg p-2.5 text-white focus:outline-none focus:border-blue-500"
+                      className="w-full bg-neutral-50 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-lg p-2.5 text-neutral-900 dark:text-white focus:outline-none focus:border-blue-500"
                     />
                     <p className="text-[10px] text-neutral-500">
                       A payment request will be triggered to your UPI app.
@@ -455,34 +455,34 @@ export default function CheckoutPage() {
             )}
 
             {paymentMethod === "card" && (
-              <div className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5 space-y-4 text-xs font-mono">
+              <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 space-y-4 text-xs font-mono">
                 <div className="space-y-1">
-                  <label className="text-neutral-400">Card Number</label>
+                  <label className="text-neutral-700 dark:text-neutral-400 font-medium">Card Number</label>
                   <input
                     type="text"
                     value={cardData.number}
                     onChange={(e) => setCardData({ ...cardData, number: e.target.value })}
-                    className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 rounded-lg p-2.5 text-neutral-950 dark:text-white focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <label className="text-neutral-400">Expiry (MM/YY)</label>
+                    <label className="text-neutral-700 dark:text-neutral-400 font-medium">Expiry (MM/YY)</label>
                     <input
                       type="text"
                       value={cardData.expiry}
                       onChange={(e) => setCardData({ ...cardData, expiry: e.target.value })}
-                      className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 rounded-lg p-2.5 text-neutral-950 dark:text-white focus:outline-none focus:border-blue-500"
                     />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-neutral-400">CVV</label>
+                    <label className="text-neutral-700 dark:text-neutral-400 font-medium">CVV</label>
                     <input
                       type="password"
                       maxLength={3}
                       value={cardData.cvv}
                       onChange={(e) => setCardData({ ...cardData, cvv: e.target.value })}
-                      className="w-full bg-neutral-900 border border-neutral-800 rounded-lg p-2.5 text-white focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 rounded-lg p-2.5 text-neutral-950 dark:text-white focus:outline-none focus:border-blue-500"
                     />
                   </div>
                 </div>
@@ -490,12 +490,12 @@ export default function CheckoutPage() {
             )}
 
             {paymentMethod === "cod" && (
-              <div className="rounded-xl border border-neutral-800 bg-neutral-900/60 p-5 space-y-2 text-xs font-mono">
-                <div className="flex items-center space-x-2 text-white font-bold">
-                  <Banknote className="w-4 h-4 text-emerald-400" />
+              <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/60 p-5 space-y-2 text-xs font-mono">
+                <div className="flex items-center space-x-2 text-neutral-900 dark:text-white font-bold">
+                  <Banknote className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <span>Cash on Delivery Active</span>
                 </div>
-                <p className="text-neutral-400 text-[11px] leading-relaxed">
+                <p className="text-neutral-600 dark:text-neutral-400 text-[11px] leading-relaxed">
                   Pay cash or scan QR with delivery agent at the time of doorstep delivery. Verified with OTP sent to {formData.phone}.
                 </p>
               </div>
@@ -505,19 +505,19 @@ export default function CheckoutPage() {
 
         {/* Right Order Review Column */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="rounded-2xl border border-neutral-800 bg-neutral-950 p-6 space-y-5">
-            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-white border-b border-neutral-900 pb-3">
+          <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 p-6 space-y-5 shadow-sm dark:shadow-none">
+            <h2 className="text-sm font-mono font-bold uppercase tracking-wider text-neutral-950 dark:text-white border-b border-neutral-200 dark:border-neutral-900 pb-3">
               BAG ITEMS ({items.reduce((acc, i) => acc + i.quantity, 0)})
             </h2>
 
             {/* Micro items list */}
-            <div className="max-h-64 overflow-y-auto divide-y divide-neutral-900 space-y-3 pr-1">
+            <div className="max-h-64 overflow-y-auto divide-y divide-neutral-200 dark:divide-neutral-900 space-y-3 pr-1">
               {items.map((item) => (
                 <div
                   key={`${item.product.id}-${item.selectedSize}-${item.selectedColor.name}`}
                   className="pt-3 first:pt-0 flex items-center space-x-3"
                 >
-                  <div className="relative w-12 h-14 rounded-lg overflow-hidden bg-neutral-900 shrink-0 border border-neutral-800">
+                  <div className="relative w-12 h-14 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 shrink-0 border border-neutral-200 dark:border-neutral-800">
                     <Image
                       src={item.product.images[0]}
                       alt={item.product.name}
@@ -527,12 +527,12 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-white truncate">{item.product.name}</p>
-                    <p className="text-[10px] font-mono text-neutral-400">
+                    <p className="text-xs font-medium text-neutral-950 dark:text-white truncate">{item.product.name}</p>
+                    <p className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400">
                       Size: {item.selectedSize} • Qty: {item.quantity}
                     </p>
                   </div>
-                  <div className="text-right text-xs font-mono font-bold text-white">
+                  <div className="text-right text-xs font-mono font-bold text-neutral-950 dark:text-white">
                     ₹{(item.product.price * item.quantity).toLocaleString("en-IN")}
                   </div>
                 </div>
@@ -540,28 +540,28 @@ export default function CheckoutPage() {
             </div>
 
             {/* Price Calculations */}
-            <div className="space-y-2 border-t border-neutral-900 pt-4 text-xs font-mono">
-              <div className="flex justify-between text-neutral-400">
+            <div className="space-y-2 border-t border-neutral-200 dark:border-neutral-900 pt-4 text-xs font-mono">
+              <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
                 <span>Subtotal</span>
                 <span>₹{subtotal.toLocaleString("en-IN")}</span>
               </div>
               {discount > 0 && (
-                <div className="flex justify-between text-green-400">
+                <div className="flex justify-between text-emerald-600 dark:text-green-400">
                   <span>Coupon Discount</span>
                   <span>-₹{discount.toLocaleString("en-IN")}</span>
                 </div>
               )}
-              <div className="flex justify-between text-neutral-400">
+              <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
                 <span>Shipping</span>
                 <span>
                   {shippingFee === 0 ? (
-                    <span className="text-blue-400 font-semibold">FREE</span>
+                    <span className="text-blue-600 dark:text-blue-400 font-semibold">FREE</span>
                   ) : (
                     `₹${shippingFee}`
                   )}
                 </span>
               </div>
-              <div className="flex justify-between text-base font-bold text-white pt-2 border-t border-neutral-900">
+              <div className="flex justify-between text-base font-bold text-neutral-950 dark:text-white pt-2 border-t border-neutral-200 dark:border-neutral-900">
                 <span>Total Due</span>
                 <span>₹{total.toLocaleString("en-IN")}</span>
               </div>

@@ -125,9 +125,9 @@ export default function CartDrawer() {
               items.map((item) => (
                 <div
                   key={`${item.product.id}-${item.selectedSize}-${item.selectedColor.name}`}
-                  className="flex space-x-4 border-b border-neutral-900 pb-4"
+                  className="flex space-x-4 border-b border-neutral-200 dark:border-neutral-900 pb-4"
                 >
-                  <div className="relative w-20 h-24 rounded-lg overflow-hidden bg-neutral-900 border border-neutral-800 shrink-0">
+                  <div className="relative w-20 h-24 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shrink-0">
                     <Image
                       src={item.product.images[0]}
                       alt={item.product.name}
@@ -140,7 +140,7 @@ export default function CartDrawer() {
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex justify-between items-start">
-                        <h3 className="text-xs font-medium text-neutral-200 line-clamp-1 pr-2">
+                        <h3 className="text-xs font-medium text-neutral-900 dark:text-neutral-200 line-clamp-1 pr-2">
                           {item.product.name}
                         </h3>
                         <button
@@ -151,20 +151,20 @@ export default function CartDrawer() {
                               item.selectedColor.name
                             )
                           }
-                          className="text-neutral-500 hover:text-red-400 transition"
+                          className="text-neutral-400 hover:text-red-500 transition"
                           aria-label="Remove item"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
                       </div>
 
-                      <div className="mt-1 flex items-center space-x-2 text-[11px] font-mono text-neutral-400">
-                        <span className="bg-neutral-900 border border-neutral-800 px-1.5 py-0.5 rounded text-white">
+                      <div className="mt-1 flex items-center space-x-2 text-[11px] font-mono text-neutral-600 dark:text-neutral-400">
+                        <span className="bg-neutral-100 dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 px-1.5 py-0.5 rounded text-neutral-900 dark:text-white font-semibold">
                           {item.selectedSize}
                         </span>
                         <span className="flex items-center space-x-1">
                           <span
-                            className="w-2.5 h-2.5 rounded-full border border-neutral-700"
+                            className="w-2.5 h-2.5 rounded-full border border-neutral-300 dark:border-neutral-700"
                             style={{ backgroundColor: item.selectedColor.hex }}
                           />
                           <span>{item.selectedColor.name}</span>
@@ -173,7 +173,7 @@ export default function CartDrawer() {
                     </div>
 
                     <div className="flex justify-between items-center mt-3">
-                      <div className="flex items-center border border-neutral-800 bg-neutral-900 rounded-md">
+                      <div className="flex items-center border border-neutral-300 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 rounded-md">
                         <button
                           onClick={() =>
                             updateQuantity(
@@ -183,11 +183,11 @@ export default function CartDrawer() {
                               item.quantity - 1
                             )
                           }
-                          className="p-1 hover:text-white text-neutral-400 transition"
+                          className="p-1 hover:text-black dark:hover:text-white text-neutral-600 dark:text-neutral-400 transition"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="px-2 text-xs font-mono font-semibold">
+                        <span className="px-2 text-xs font-mono font-semibold text-neutral-900 dark:text-white">
                           {item.quantity}
                         </span>
                         <button
@@ -199,14 +199,14 @@ export default function CartDrawer() {
                               item.quantity + 1
                             )
                           }
-                          className="p-1 hover:text-white text-neutral-400 transition"
+                          className="p-1 hover:text-black dark:hover:text-white text-neutral-600 dark:text-neutral-400 transition"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
                       </div>
 
                       <div className="text-right">
-                        <p className="text-xs font-mono font-bold text-white">
+                        <p className="text-xs font-mono font-bold text-neutral-900 dark:text-white">
                           ₹{(item.product.price * item.quantity).toLocaleString("en-IN")}
                         </p>
                       </div>
@@ -219,7 +219,7 @@ export default function CartDrawer() {
 
           {/* Footer & Checkout Area */}
           {items.length > 0 && (
-            <div className="border-t border-neutral-800 bg-neutral-950 p-6 space-y-4">
+            <div className="border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-950 p-6 space-y-4">
               {/* Promo Code Input */}
               <div>
                 <div className="flex space-x-2">
@@ -230,12 +230,12 @@ export default function CartDrawer() {
                       value={couponInput}
                       onChange={(e) => setCouponInput(e.target.value)}
                       placeholder="Discount code (e.g. ZEN10)"
-                      className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-8 pr-3 py-2 text-xs font-mono uppercase text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500"
+                      className="w-full bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-800 rounded-lg pl-8 pr-3 py-2 text-xs font-mono uppercase text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:border-blue-500"
                     />
                   </div>
                   <button
                     onClick={() => handleApplyCoupon()}
-                    className="bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-mono px-3 py-2 rounded-lg transition"
+                    className="bg-neutral-200 hover:bg-neutral-300 text-neutral-900 dark:bg-neutral-800 dark:hover:bg-neutral-700 dark:text-neutral-200 text-xs font-mono px-3.5 py-2 rounded-lg transition font-semibold"
                   >
                     Apply
                   </button>

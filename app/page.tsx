@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-neutral-900 bg-neutral-950">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-neutral-200 dark:border-neutral-900 bg-neutral-100 dark:bg-neutral-950">
         {/* Background Visual Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -27,19 +27,19 @@ export default function Home() {
         {/* Hero Content */}
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 text-center flex flex-col items-center">
           {/* Badge */}
-          <div className="inline-flex items-center space-x-2 rounded-full border border-neutral-800 bg-neutral-900/80 backdrop-blur-md px-3.5 py-1.5 text-xs font-mono text-neutral-300 mb-6">
+          <div className="inline-flex items-center space-x-2 rounded-full border border-neutral-300 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md px-3.5 py-1.5 text-xs font-mono text-neutral-800 dark:text-neutral-300 mb-6 shadow-sm">
             <span className="flex h-2 w-2 rounded-full bg-blue-500 animate-ping" />
-            <span className="text-white font-bold tracking-wider">DROP 01: MONOLITH</span>
-            <span className="text-neutral-500">|</span>
-            <span className="text-blue-400 font-medium">LIMITED CAPSULE</span>
+            <span className="text-neutral-900 dark:text-white font-bold tracking-wider">DROP 01: MONOLITH</span>
+            <span className="text-neutral-400 dark:text-neutral-500">|</span>
+            <span className="text-blue-600 dark:text-blue-400 font-medium">LIMITED CAPSULE</span>
           </div>
 
           {/* Main Title */}
-          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-mono tracking-tighter text-white uppercase max-w-5xl leading-none">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-mono tracking-tighter text-neutral-950 dark:text-white uppercase max-w-5xl leading-none">
             ARCHITECTURAL <span className="text-transparent bg-clip-text bg-gradient-to-r from-neutral-950 via-neutral-700 to-neutral-500 dark:from-white dark:via-neutral-300 dark:to-neutral-500">STREETWEAR</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl text-sm sm:text-base md:text-lg text-neutral-400 font-sans font-normal leading-relaxed">
+          <p className="mt-6 max-w-2xl text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 font-sans font-normal leading-relaxed">
             Crafted for the modern Indian youth. Heavyweight 280–380 GSM combed textiles, boxy drop-shoulder draping, and utilitarian finishing.
           </p>
 
@@ -55,29 +55,29 @@ export default function Home() {
 
             <Link
               href="/products?category=T-Shirts"
-              className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-neutral-900/80 hover:bg-neutral-800 border border-neutral-800 text-neutral-200 hover:text-white font-mono text-xs uppercase font-bold px-8 py-4 rounded-xl transition"
+              className="w-full sm:w-auto flex items-center justify-center space-x-2 bg-white hover:bg-neutral-100 border border-neutral-300 text-neutral-900 dark:bg-neutral-900/80 dark:hover:bg-neutral-800 dark:border-neutral-800 dark:text-neutral-200 dark:hover:text-white font-mono text-xs uppercase font-bold px-8 py-4 rounded-xl transition shadow-sm dark:shadow-none"
             >
               <span>Heavyweight Tees</span>
             </Link>
           </div>
 
           {/* Micro Spec Pills */}
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left w-full max-w-3xl border-t border-neutral-900 pt-8">
+          <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 text-left w-full max-w-3xl border-t border-neutral-200 dark:border-neutral-900 pt-8">
             <div className="space-y-1">
               <p className="text-[10px] font-mono uppercase text-neutral-500">Weight</p>
-              <p className="text-xs font-mono font-bold text-white">280–380 GSM</p>
+              <p className="text-xs font-mono font-bold text-neutral-950 dark:text-white">280–380 GSM</p>
             </div>
             <div className="space-y-1">
               <p className="text-[10px] font-mono uppercase text-neutral-500">Origin</p>
-              <p className="text-xs font-mono font-bold text-white">Tiruppur, India</p>
+              <p className="text-xs font-mono font-bold text-neutral-950 dark:text-white">Tiruppur, India</p>
             </div>
             <div className="space-y-1">
               <p className="text-[10px] font-mono uppercase text-neutral-500">Fit</p>
-              <p className="text-xs font-mono font-bold text-white">Boxy &amp; Oversized</p>
+              <p className="text-xs font-mono font-bold text-neutral-950 dark:text-white">Boxy &amp; Oversized</p>
             </div>
             <div className="space-y-1">
               <p className="text-[10px] font-mono uppercase text-neutral-500">Delivery</p>
-              <p className="text-xs font-mono font-bold text-blue-400">Free Over ₹1,999</p>
+              <p className="text-xs font-mono font-bold text-blue-600 dark:text-blue-400">Free Over ₹1,999</p>
             </div>
           </div>
         </div>
@@ -85,23 +85,23 @@ export default function Home() {
 
       {/* Featured Drop 01 Showcase */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl w-full">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-neutral-900">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-neutral-200 dark:border-neutral-900">
           <div>
-            <div className="flex items-center space-x-2 text-xs font-mono text-blue-500 uppercase tracking-widest mb-1.5">
+            <div className="flex items-center space-x-2 text-xs font-mono text-blue-600 dark:text-blue-500 uppercase tracking-widest mb-1.5">
               <Flame className="w-4 h-4" />
               <span>Current Release</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-mono font-bold uppercase tracking-tight text-white">
+            <h2 className="text-2xl sm:text-3xl font-mono font-bold uppercase tracking-tight text-neutral-950 dark:text-white">
               Drop 01: Monolith
             </h2>
-            <p className="text-xs text-neutral-400 mt-1">
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">
               Dual-angle garments engineered with mineral washes and raw boxy silhouettes.
             </p>
           </div>
 
           <Link
             href="/products"
-            className="mt-4 md:mt-0 flex items-center space-x-1.5 text-xs font-mono uppercase text-neutral-400 hover:text-white transition group"
+            className="mt-4 md:mt-0 flex items-center space-x-1.5 text-xs font-mono uppercase text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition group"
           >
             <span>View All Garments ({products.length})</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -117,16 +117,16 @@ export default function Home() {
       </section>
 
       {/* Category Explorer ("The Vault") */}
-      <section className="bg-neutral-950 border-y border-neutral-900 py-20 px-4 sm:px-6 lg:px-8">
+      <section className="bg-neutral-50 dark:bg-neutral-950 border-y border-neutral-200 dark:border-neutral-900 py-20 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="text-center max-w-xl mx-auto mb-12">
-            <span className="text-xs font-mono uppercase tracking-widest text-blue-500">
+            <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-500 font-bold">
               Categorized Silhouettes
             </span>
-            <h2 className="text-2xl sm:text-3xl font-mono font-bold uppercase tracking-tight text-white mt-1">
+            <h2 className="text-2xl sm:text-3xl font-mono font-bold uppercase tracking-tight text-neutral-950 dark:text-white mt-1">
               Curated Wardrobe Categories
             </h2>
-            <p className="text-xs text-neutral-400 mt-2 font-sans">
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 mt-2 font-sans">
               Strictly apparel and tactile accessories. No clutter, only essential wardrobe staples.
             </p>
           </div>
@@ -223,39 +223,39 @@ export default function Home() {
       <section className="py-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <span className="text-xs font-mono uppercase tracking-widest text-blue-500">
+            <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-500 font-bold">
               The Indian Streetwear Manifesto
             </span>
-            <h2 className="text-3xl sm:text-4xl font-mono font-bold uppercase tracking-tight text-white leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-mono font-bold uppercase tracking-tight text-neutral-950 dark:text-white leading-tight">
               WHY WE REJECT FAST-FASHION POLYESTERS.
             </h2>
-            <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans">
               Mainstream commercial fast-fashion is flooded with flimsy 160 GSM synthetic blends that shrink after a single wash. We take inspiration from brutalist architecture and Indian textile heritage.
             </p>
-            <p className="text-sm text-neutral-400 leading-relaxed font-sans">
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans">
               Every drop is cut from custom-milled heavyweight combed Indian cotton in Tiruppur, washed with mineral stone dyes, and sewn with double-needle hems to preserve its boxy silhouette for years.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-900">
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-900">
               <div className="flex items-start space-x-3">
-                <Box className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                <Box className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-mono font-bold text-white uppercase">
+                  <h4 className="text-xs font-mono font-bold text-neutral-950 dark:text-white uppercase">
                     Heavy Density
                   </h4>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                  <p className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-0.5">
                     Substantial 280–380 GSM weights that hold their structured drape.
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-3">
-                <Layers className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                <Layers className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-mono font-bold text-white uppercase">
+                  <h4 className="text-xs font-mono font-bold text-neutral-950 dark:text-white uppercase">
                     Pre-Shrunk Milled
                   </h4>
-                  <p className="text-[11px] text-neutral-400 mt-0.5">
+                  <p className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-0.5">
                     Zero post-wash distortion or neckline puckering.
                   </p>
                 </div>
@@ -263,7 +263,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900">
+          <div className="relative aspect-square sm:aspect-[4/3] rounded-2xl overflow-hidden border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900 shadow-sm dark:shadow-none">
             <Image
               src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1200&auto=format&fit=crop"
               alt="Zen Studio Fabric Craftsmanship"
@@ -273,7 +273,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
             <div className="absolute bottom-6 left-6 right-6">
-              <div className="inline-block bg-neutral-950/80 backdrop-blur-md border border-neutral-800 px-3 py-1.5 rounded-lg text-xs font-mono text-neutral-300">
+              <div className="inline-block bg-neutral-950/80 backdrop-blur-md border border-neutral-800 px-3 py-1.5 rounded-lg text-xs font-mono text-neutral-200">
                 <span>📍 Milled &amp; Crafted in Tiruppur, Tamil Nadu</span>
               </div>
             </div>
@@ -282,21 +282,21 @@ export default function Home() {
       </section>
 
       {/* Drop Alert Banner CTA */}
-      <section className="bg-gradient-to-r from-blue-950/40 via-neutral-900 to-neutral-950 border-t border-neutral-800 py-16 px-4 text-center">
+      <section className="bg-neutral-100 dark:bg-gradient-to-r dark:from-blue-950/40 dark:via-neutral-900 dark:to-neutral-950 border-t border-neutral-200 dark:border-neutral-800 py-16 px-4 text-center">
         <div className="max-w-2xl mx-auto space-y-4">
-          <span className="text-xs font-mono uppercase tracking-widest text-blue-400 font-bold">
+          <span className="text-xs font-mono uppercase tracking-widest text-blue-600 dark:text-blue-400 font-bold">
             ⚡ Drop 02 In Development
           </span>
-          <h2 className="text-2xl sm:text-3xl font-mono font-bold uppercase text-white">
+          <h2 className="text-2xl sm:text-3xl font-mono font-bold uppercase text-neutral-950 dark:text-white">
             WANT EARLY ACCESS BEFORE PUBLIC RELEASE?
           </h2>
-          <p className="text-xs text-neutral-400 font-sans max-w-md mx-auto">
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 font-sans max-w-md mx-auto">
             Our capsule drops are limited to 150 pieces per silhouette and do not restock.
           </p>
           <div className="pt-2">
             <Link
               href="/products"
-              className="inline-flex items-center space-x-2 bg-white text-black hover:bg-neutral-200 text-xs font-mono font-bold uppercase px-6 py-3.5 rounded-xl transition"
+              className="inline-flex items-center space-x-2 bg-neutral-950 text-white hover:bg-neutral-800 dark:bg-white dark:text-black dark:hover:bg-neutral-200 text-xs font-mono font-bold uppercase px-6 py-3.5 rounded-xl transition shadow-lg"
             >
               <span>Explore Current Available Pieces</span>
               <ArrowRight className="w-4 h-4" />

@@ -303,33 +303,33 @@ export default function AdminPage() {
           <p className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400">2.1 items per bag</p>
         </div>
 
-        <div className="p-5 rounded-2xl border border-neutral-850 bg-neutral-950 space-y-2">
+        <div className="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white dark:bg-neutral-950 space-y-2">
           <div className="flex items-center justify-between text-neutral-500 text-xs font-mono">
             <span>LOW STOCK ALERTS</span>
-            <AlertTriangle className="w-4 h-4 text-amber-400" />
+            <AlertTriangle className="w-4 h-4 text-amber-500" />
           </div>
-          <p className="text-2xl font-mono font-black text-amber-400">3 SKUs</p>
-          <p className="text-[11px] font-mono text-neutral-400">Restock needed soon</p>
+          <p className="text-2xl font-mono font-black text-amber-600 dark:text-amber-400">3 SKUs</p>
+          <p className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400">Restock needed soon</p>
         </div>
       </div>
 
       {/* Tab 1: Inventory Table */}
       {activeTab === "inventory" && (
-        <div className="rounded-2xl border border-neutral-850 bg-neutral-950 overflow-hidden shadow-2xl">
-          <div className="px-6 py-4 border-b border-neutral-900 flex justify-between items-center">
-            <h2 className="text-sm font-mono font-bold uppercase text-white">
+        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white dark:bg-neutral-950 overflow-hidden shadow-sm dark:shadow-2xl">
+          <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-900 flex justify-between items-center">
+            <h2 className="text-sm font-mono font-bold uppercase text-neutral-950 dark:text-white">
               Capsule Garment Catalog
             </h2>
-            <span className="text-xs font-mono text-neutral-500">
+            <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
               {productList.length} active styles
             </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-neutral-900/60 text-neutral-400 border-b border-neutral-900">
+              <thead className="bg-neutral-100 dark:bg-neutral-900/60 text-neutral-600 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-900">
                 <tr>
-                  <th className="py-3 px-6 font-bold text-white">GARMENT</th>
+                  <th className="py-3 px-6 font-bold text-neutral-900 dark:text-white">GARMENT</th>
                   <th className="py-3 px-6">CATEGORY</th>
                   <th className="py-3 px-6">PRICE</th>
                   <th className="py-3 px-6">FABRIC / GSM</th>
@@ -337,12 +337,12 @@ export default function AdminPage() {
                   <th className="py-3 px-6 text-right">ACTION</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-900">
+              <tbody className="divide-y divide-neutral-200 dark:divide-neutral-900">
                 {productList.map((product) => (
-                  <tr key={product.id} className="hover:bg-neutral-900/30 transition">
+                  <tr key={product.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/30 transition">
                     <td className="py-4 px-6">
                       <div className="flex items-center space-x-3">
-                        <div className="relative w-10 h-12 rounded-lg overflow-hidden bg-neutral-900 shrink-0 border border-neutral-800">
+                        <div className="relative w-10 h-12 rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-900 shrink-0 border border-neutral-200 dark:border-neutral-800">
                           <Image
                             src={product.images[0]}
                             alt={product.name}
@@ -351,16 +351,16 @@ export default function AdminPage() {
                             sizes="40px"
                           />
                         </div>
-                        <span className="font-semibold text-white max-w-xs truncate block">
+                        <span className="font-semibold text-neutral-900 dark:text-white max-w-xs truncate block">
                           {product.name}
                         </span>
                       </div>
                     </td>
-                    <td className="py-4 px-6 text-neutral-400">{product.category}</td>
-                    <td className="py-4 px-6 text-white font-bold">
+                    <td className="py-4 px-6 text-neutral-600 dark:text-neutral-400">{product.category}</td>
+                    <td className="py-4 px-6 text-neutral-950 dark:text-white font-bold">
                       ₹{product.price.toLocaleString("en-IN")}
                     </td>
-                    <td className="py-4 px-6 text-neutral-400">
+                    <td className="py-4 px-6 text-neutral-600 dark:text-neutral-400">
                       {product.gsm ? `${product.gsm} GSM Combed` : product.fabric}
                     </td>
                     <td className="py-4 px-6">
@@ -372,8 +372,8 @@ export default function AdminPage() {
                               key={sz}
                               className={`text-[10px] px-1.5 py-0.5 rounded border ${
                                 qty <= 2
-                                  ? "bg-amber-950/40 text-amber-400 border-amber-800/40"
-                                  : "bg-neutral-900 text-neutral-300 border-neutral-800"
+                                  ? "bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800/40"
+                                  : "bg-neutral-100 text-neutral-800 border-neutral-300 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-800"
                               }`}
                             >
                               {sz}:{qty}
@@ -385,7 +385,7 @@ export default function AdminPage() {
                     <td className="py-4 px-6 text-right">
                       <button
                         onClick={() => deleteProduct(product.id)}
-                        className="p-1.5 text-neutral-500 hover:text-red-400 rounded-lg transition"
+                        className="p-1.5 text-neutral-400 hover:text-red-500 rounded-lg transition"
                         title="Delete Garment"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -401,21 +401,21 @@ export default function AdminPage() {
 
       {/* Tab 2: Orders Management Pipeline */}
       {activeTab === "orders" && (
-        <div className="rounded-2xl border border-neutral-850 bg-neutral-950 overflow-hidden shadow-2xl">
-          <div className="px-6 py-4 border-b border-neutral-900 flex justify-between items-center">
-            <h2 className="text-sm font-mono font-bold uppercase text-white">
+        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white dark:bg-neutral-950 overflow-hidden shadow-sm dark:shadow-2xl">
+          <div className="px-6 py-4 border-b border-neutral-200 dark:border-neutral-900 flex justify-between items-center">
+            <h2 className="text-sm font-mono font-bold uppercase text-neutral-950 dark:text-white">
               Customer Drop Orders
             </h2>
-            <span className="text-xs font-mono text-neutral-500">
+            <span className="text-xs font-mono text-neutral-500 dark:text-neutral-400">
               Live Pan-India Deliveries
             </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="bg-neutral-900/60 text-neutral-400 border-b border-neutral-900">
+              <thead className="bg-neutral-100 dark:bg-neutral-900/60 text-neutral-600 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-900">
                 <tr>
-                  <th className="py-3 px-6 font-bold text-white">ORDER ID</th>
+                  <th className="py-3 px-6 font-bold text-neutral-900 dark:text-white">ORDER ID</th>
                   <th className="py-3 px-6">CUSTOMER &amp; CITY</th>
                   <th className="py-3 px-6">ITEMS</th>
                   <th className="py-3 px-6">TOTAL</th>
@@ -423,29 +423,29 @@ export default function AdminPage() {
                   <th className="py-3 px-6">STATUS</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-neutral-900">
+              <tbody className="divide-y divide-neutral-200 dark:divide-neutral-900">
                 {orders.map((order) => (
-                  <tr key={order.id} className="hover:bg-neutral-900/30 transition">
-                    <td className="py-4 px-6 font-bold text-blue-400">{order.id}</td>
+                  <tr key={order.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-900/30 transition">
+                    <td className="py-4 px-6 font-bold text-blue-600 dark:text-blue-400">{order.id}</td>
                     <td className="py-4 px-6">
-                      <p className="text-white font-semibold">{order.customer}</p>
+                      <p className="text-neutral-950 dark:text-white font-semibold">{order.customer}</p>
                       <p className="text-[10px] text-neutral-500">{order.city}</p>
                     </td>
-                    <td className="py-4 px-6 text-neutral-300">{order.items}</td>
-                    <td className="py-4 px-6 font-bold text-white">
+                    <td className="py-4 px-6 text-neutral-700 dark:text-neutral-300">{order.items}</td>
+                    <td className="py-4 px-6 font-bold text-neutral-950 dark:text-white">
                       ₹{order.amount.toLocaleString("en-IN")}
                     </td>
-                    <td className="py-4 px-6 text-neutral-400">{order.payment}</td>
+                    <td className="py-4 px-6 text-neutral-600 dark:text-neutral-400">{order.payment}</td>
                     <td className="py-4 px-6">
                       <select
                         value={order.status}
                         onChange={(e) => updateOrderStatus(order.id, e.target.value)}
                         className={`text-xs font-mono rounded-lg px-2.5 py-1 border focus:outline-none ${
                           order.status === "Delivered"
-                            ? "bg-emerald-950/60 text-emerald-400 border-emerald-800"
+                            ? "bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800"
                             : order.status === "Dispatched"
-                            ? "bg-blue-950/60 text-blue-400 border-blue-800"
-                            : "bg-amber-950/60 text-amber-400 border-amber-800"
+                            ? "bg-blue-100 text-blue-900 border-blue-300 dark:bg-blue-950/60 dark:text-blue-400 dark:border-blue-800"
+                            : "bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/60 dark:text-amber-400 dark:border-amber-800"
                         }`}
                       >
                         <option value="Processing">Processing</option>

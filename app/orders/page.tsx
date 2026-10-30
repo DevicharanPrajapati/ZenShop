@@ -143,7 +143,7 @@ export default function OrdersPage() {
         </div>
 
         {/* Stepper Timeline */}
-        <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-2.5 sm:before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-neutral-800">
+        <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-2.5 sm:before:left-3.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-neutral-200 dark:before:bg-neutral-800">
           {activeOrder.steps.map((step, idx) => (
             <div key={idx} className="relative flex items-start space-x-4">
               {/* Stepper Dot */}
@@ -151,7 +151,7 @@ export default function OrdersPage() {
                 className={`absolute -left-6 sm:-left-8 top-1 flex h-5 w-5 items-center justify-center rounded-full border-2 ${
                   step.completed
                     ? "bg-blue-600 border-blue-500 text-white"
-                    : "bg-neutral-900 border-neutral-700 text-neutral-600"
+                    : "bg-neutral-100 dark:bg-neutral-900 border-neutral-300 dark:border-neutral-700 text-neutral-400 dark:text-neutral-600"
                 }`}
               >
                 {step.completed && <CheckCircle2 className="w-3.5 h-3.5" />}
@@ -169,21 +169,21 @@ export default function OrdersPage() {
                   </h3>
                   <span className="text-[10px] font-mono text-neutral-500">{step.time}</span>
                 </div>
-                <p className="text-xs text-neutral-400 font-sans">{step.desc}</p>
+                <p className="text-xs text-neutral-600 dark:text-neutral-400 font-sans">{step.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Origin / Dest Strip */}
-        <div className="rounded-xl border border-neutral-850 bg-neutral-900/40 p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+        <div className="rounded-xl border border-neutral-200 dark:border-neutral-850 bg-neutral-50 dark:bg-neutral-900/40 p-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
           <div>
-            <span className="text-neutral-500 text-[10px] block">DISPATCHED FROM</span>
-            <span className="text-neutral-200">{activeOrder.origin}</span>
+            <span className="text-neutral-500 text-[10px] block font-semibold">DISPATCHED FROM</span>
+            <span className="text-neutral-900 dark:text-neutral-200 font-medium">{activeOrder.origin}</span>
           </div>
           <div>
-            <span className="text-neutral-500 text-[10px] block">DELIVERING TO</span>
-            <span className="text-neutral-200">{activeOrder.destination}</span>
+            <span className="text-neutral-500 text-[10px] block font-semibold">DELIVERING TO</span>
+            <span className="text-neutral-900 dark:text-neutral-200 font-medium">{activeOrder.destination}</span>
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <article
-      className="group relative flex flex-col bg-neutral-950 border border-neutral-850 hover:border-neutral-700 rounded-2xl overflow-hidden transition-all duration-300"
+      className="group relative flex flex-col bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-850 hover:border-neutral-400 dark:hover:border-neutral-700 rounded-2xl overflow-hidden transition-all duration-300 shadow-sm dark:shadow-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);
@@ -170,9 +170,9 @@ export default function ProductCard({ product }: ProductCardProps) {
       {/* Info Container */}
       <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between space-y-3">
         <div>
-          <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
+          <div className="flex items-center justify-between text-[11px] font-mono text-neutral-600 dark:text-neutral-400">
             <span>{product.category}</span>
-            <span className="text-neutral-500">{product.fit}</span>
+            <span className="text-neutral-500 dark:text-neutral-400">{product.fit}</span>
           </div>
 
           <Link href={`/products/${product.id}`} className="block group/title mt-1">
