@@ -234,11 +234,18 @@ When discussing this project with recruiters, engineering managers, or interview
 
 ---
 
-## 8. Supabase Native Cloud Integration
+## 8. Supabase Native Cloud Integration & Authentication
 
 The platform is integrated with **Supabase** via `@supabase/supabase-js`, completely eliminating heavyweight ORMs like Prisma.
 
-### Database Tables (`supabase_schema.sql`)
+### Authentication System (`lib/auth-context.tsx` & `/login`)
+- **Email & Password**: User registration with full name and secure credential authentication via Supabase Auth.
+- **Google OAuth**: One-click Google sign-in provider.
+- **Session Persistence**: Sessions sync with browser storage and auto-refresh in the background.
+- **Navbar Profile Integration**: Shows user avatar, initials, or patron name with a quick account management drawer.
+- **Checkout Auto-Fill**: Automatically fills customer name and email in the `/checkout` shipping form if authenticated.
+
+### Database Tables (`supabase_schema.sql` / `supabase/`)
 1. **`products`**: Stores garment names, 280-380 GSM fabric weights, categories, sizes, color JSON swatches, stock levels, and multi-angle image URLs.
 2. **`orders`**: Real-time customer orders with shipping addresses, Indian PIN codes, subtotal, discount codes, payment modes (UPI / Card / COD), and delivery statuses.
 3. **`reviews`**: Verified customer reviews with ratings and city origins.
@@ -246,7 +253,7 @@ The platform is integrated with **Supabase** via `@supabase/supabase-js`, comple
 ### Setup Instructions
 1. Open your Supabase Dashboard project (**zenshop**).
 2. Go to **SQL Editor** ➔ Click **New query** ➔ Paste the contents of [`supabase_schema.sql`](file:///D:/Projects/E-commerce/zenshop/supabase_schema.sql) ➔ Click **RUN**.
-3. Add your keys to `.env.local`:
+3. Add your keys to `.env`:
    ```env
    NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-public-key
@@ -258,5 +265,6 @@ The platform is integrated with **Supabase** via `@supabase/supabase-js`, comple
 ## 9. Future Roadmap & Extensions
 
 - [x] **Native Supabase Client Integration**: Replaced Prisma with `@supabase/supabase-js` client and SQL migration seed.
+- [x] **Supabase Authentication**: Full customer login, registration, Google OAuth, and auto-populated checkout.
 - [ ] **Razorpay Live Gateway**: Plug in live Razorpay webhooks for real Indian UPI & card transactions in test mode.
-- [ ] **Supabase Auth & Storage**: Add Google OAuth and phone OTP login alongside product image uploads directly from `/admin`.
+- [ ] **Supabase Storage**: Add garment photo uploads directly from `/admin`.

@@ -32,6 +32,8 @@ const rawKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 const supabaseUrl = normalizeSupabaseUrl(rawUrl);
 const supabaseAnonKey = rawKey.trim();
 
+const isBrowser = typeof window !== "undefined";
+
 function initSupabase(): SupabaseClient | null {
   if (!supabaseUrl || !supabaseAnonKey) return null;
   if (supabaseUrl.includes("your-project") || supabaseUrl.includes("placeholder")) {
@@ -41,7 +43,8 @@ function initSupabase(): SupabaseClient | null {
   try {
     return createClient(supabaseUrl, supabaseAnonKey, {
       auth: {
-        persistSession: false,
+        persistSession: isBrowser,
+        autoRefreshToken: isBrowser,
       },
     });
   } catch (err) {

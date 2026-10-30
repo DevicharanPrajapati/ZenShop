@@ -18,21 +18,34 @@ import {
 } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { createOrder } from "@/lib/supabase";
+import { useAuth } from "@/lib/auth-context";
 
 type PaymentMethod = "upi" | "card" | "cod";
 
 export default function CheckoutPage() {
   const { items, subtotal, discount, shippingFee, total, appliedCoupon, clearCart } = useStore();
+  const { user } = useAuth();
 
   // Form states
   const [formData, setFormData] = useState({
-    fullName: "Aryan Khanna",
-    email: "aryan.khanna@example.com",
+    fullName: user?.fullName || "Aryan Khanna",
+    email: user?.email || "aryan.khanna@example.com",
     phone: "9876543210",
     pincode: "110001",
     city: "New Delhi",
     state: "Delhi",
     address: "Flat 402, Block B, Connaught Place",
+  });
+
+  // Sync if user logs in while on checkout
+  useState(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        fullName: user.fullName || prev.fullName,
+        email: user.email || prev.email,
+      }));
+    }
   });
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("upi");

@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, ShoppingBag, Heart, Menu, X, Shield, ArrowRight } from "lucide-react";
+import { Search, ShoppingBag, Heart, Menu, X, Shield, ArrowRight, User } from "lucide-react";
 import { useStore } from "@/lib/store";
+import { useAuth } from "@/lib/auth-context";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { cartCount, openCart, wishlist } = useStore();
+  const { user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -95,6 +97,25 @@ export default function Navbar() {
             {wishlist.length > 0 && (
               <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-neutral-200 text-[10px] font-bold text-neutral-950">
                 {wishlist.length}
+              </span>
+            )}
+          </Link>
+
+          {/* Supabase User Account / Login */}
+          <Link
+            href="/login"
+            className={`flex items-center space-x-1.5 rounded-lg transition ${
+              user
+                ? "bg-blue-950/60 border border-blue-800 text-blue-300 px-2.5 py-1.5 text-xs font-mono"
+                : "p-2 text-neutral-300 hover:text-white hover:bg-neutral-900"
+            }`}
+            title={user ? `Signed in as ${user.email}` : "Sign in to Studio"}
+            aria-label="Account Login"
+          >
+            <User className="w-4 h-4" />
+            {user && (
+              <span className="hidden sm:inline-block max-w-[70px] truncate font-bold">
+                {user.fullName || "Patron"}
               </span>
             )}
           </Link>

@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import CartDrawer from "@/components/CartDrawer";
 import { StoreProvider } from "@/lib/store";
+import { AuthProvider } from "@/lib/auth-context";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -46,13 +47,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#0d0d0f] text-[#f4f4f5] selection:bg-blue-600 selection:text-white">
-        <StoreProvider>
-          <MarqueeBanner />
-          <Navbar />
-          <CartDrawer />
-          <main className="flex-1 flex flex-col">{children}</main>
-          <Footer />
-        </StoreProvider>
+        <AuthProvider>
+          <StoreProvider>
+            <MarqueeBanner />
+            <Navbar />
+            <CartDrawer />
+            <main className="flex-1 flex flex-col">{children}</main>
+            <Footer />
+          </StoreProvider>
+        </AuthProvider>
       </body>
     </html>
   );
